@@ -1,25 +1,26 @@
-//text mouve
-gsap.fromTo(".txt",{y:500},{y:100 , duration:5 , scale:3});
+gsap.fromTo(".txt",{y:500},{y:100 , duration:2 , scale:3}); //parallax for text
 
-gsap.fromTo(".birds",{y:0},{y:150 , duration:5 , scale:1});
+gsap.fromTo(".birds",{y:0},{y:170 , duration:1 , scale:1}); //animation for birds
 
+
+//cloud parallax scroling
 gsap.from(".cloud1",{
     scrollTrigger : {
-        scrub: true
+        scrub: 1
 
     },
     x: -300,
 })
 gsap.from(".cloud2",{
     scrollTrigger : {
-        scrub: true
+        scrub: 1
 
     },
     x: 600,
 })
 gsap.from(".bushes",{
     scrollTrigger : {
-        scrub: true
+        scrub: 1
 
     },
     x: -150,
@@ -27,12 +28,13 @@ gsap.from(".bushes",{
 })
 gsap.from(".button",{
     scrollTrigger : {
-        scrub: true
+        scrub: 1
 
     },
-    y:400,
-    scale:2,
+    x:700,
+    opacity:0,
 })
+
 
 
 
