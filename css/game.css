@@ -1,0 +1,84 @@
+* {
+  margin: 0;
+}
+
+body {
+  background-color: #292929;
+  background-image: url("../assets/game-bg.jpg");
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  animation: slidein 20s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  font-family: "Berlin Sans FB Demi", sans-serif;
+}
+.moon-animation {
+  width: 400px;
+}
+
+.content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content h2 {
+  color: #fff;
+  font-size: 8em;
+  position: absolute;
+  top: 10%;
+}
+
+.content h2:nth-child(1) {
+  color: transparent;
+  -webkit-text-stroke: 1px #292929;
+}
+
+.content h2:nth-child(2) {
+  color: #7ab980;
+  animation: wavy 4s ease-in-out infinite;
+}
+
+@keyframes wavy {
+  0%,
+  100% {
+    clip-path: polygon(
+      0% 45%,
+      16% 44%,
+      33% 50%,
+      54% 60%,
+      70% 61%,
+      84% 59%,
+      100% 52%,
+      100% 100%,
+      0% 100%
+    );
+  }
+
+  50% {
+    clip-path: polygon(
+      0% 60%,
+      15% 65%,
+      34% 66%,
+      51% 62%,
+      67% 50%,
+      84% 45%,
+      100% 46%,
+      100% 100%,
+      0% 100%
+    );
+  }
+}
+@keyframes slidein {
+  from {
+    background-position: top;
+    background-size: 3000px;
+  }
+  to {
+    background-position: -100px 0px;
+    background-size: 2750px;
+  }
+}
