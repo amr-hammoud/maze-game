@@ -48,14 +48,14 @@ body{
     top: 0;
     left: 0;
 }
-.test{
+.cloud1{
     position: absolute;
     width: 50%;
     height: 50%;
-    top: 0;
+    top: 30px;
     left: 0;
 }
-.test2{
+.cloud2{
     position: absolute;
     width: 70%;
     height: 50%;
