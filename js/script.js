@@ -30,8 +30,8 @@ gsap.from(".button",{
         scrub: true
 
     },
-    y:400,
-    scale:2,
+    x:700,
+    opacity:0,
 })
 
 
