@@ -1,32 +1,39 @@
 //text mouve
-/*gsap.from(".txt",{
+gsap.fromTo(".txt",{y:500},{y:100 , duration:5 , scale:3});
+
+gsap.fromTo(".birds",{y:0},{y:150 , duration:5 , scale:1});
+
+gsap.from(".cloud1",{
     scrollTrigger : {
         scrub: true
 
     },
-    y: 500,
-})*/
-gsap.fromto(".text",{x:300, y:500},{
-
-    y:100,
-    x:300,
-    duration:3 ,
-
+    x: -300,
 })
-//brids move
-gsap.from(".birds",{
+gsap.from(".cloud2",{
     scrollTrigger : {
         scrub: true
 
     },
-    y: 40,
+    x: 600,
 })
-gsap.from(".birds",{
+gsap.from(".bushes",{
     scrollTrigger : {
         scrub: true
 
     },
-    y: -60,
+    x: -150,
+    scale:1,
 })
+gsap.from(".button",{
+    scrollTrigger : {
+        scrub: true
+
+    },
+    y:400,
+    scale:2,
+})
+
+
 
 
