@@ -122,10 +122,16 @@ class Scene2Level1 extends Phaser.Scene
         this.left_panel = this.add.rectangle(0,0,300,500,0x7ab980)
         this.left_panel.setOrigin(0,0)
 
-        this.min_score = 20
-
         this.score = 0;
         this.score_label = this.add.text(50,50, `Score: ${this.score}`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
+
+        this.min_score = 20
+        this.alert = this.add.text(50,130, `Score at least\n${this.min_score}pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
+
+        this.hint = this.add.text(50,290, `Each Apple\n\n\nis 10pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
+        this.apple_hint = this.physics.add.sprite(80,365,'apple')
+        this.apple_hint.scale = 3
+        
 
         this.cursorKeys = this.input.keyboard.createCursorKeys()
 
@@ -162,6 +168,7 @@ class Scene2Level1 extends Phaser.Scene
         })
         this.apple_1.play('apple_anim')
         this.apple_2.play('apple_anim')
+        this.apple_hint.play('apple_anim')
 
         this.trap = this.physics.add.sprite(605,310,'trap')
         this.trap.play('trap_anim')
@@ -185,11 +192,7 @@ class Scene2Level1 extends Phaser.Scene
         })
 
         this.physics.add.collider(this.ninja,this.to_lvl_2, () => {
-            if(this.score < 20){
-                this.alert = this.add.text(50,150, `Score at least\n${this.min_score}pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
-                this.alert.setTint(0xed4444)
-            }
-            else
+            if(this.score >= 20)
                 this.scene.start('gameLevelTwo')
         })
 
@@ -267,7 +270,7 @@ const config = {
     physics: {
         default: "arcade",
         arcade: {
-          debug: true
+          debug: false
         }
       }
 };
