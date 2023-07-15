@@ -2,7 +2,7 @@ class Scene1 extends Phaser.Scene
 {
     constructor ()
     {
-        super('homePage')
+        super('homePage');
     }
 
     preload ()
@@ -12,7 +12,7 @@ class Scene1 extends Phaser.Scene
       
     create ()
     {
-        this.background = this.add.image(0,0,'bg_lvl1' )
+        this.background = this.add.tileSprite(200,0,600, 500, 'bg_lvl1' )
         this.background.setOrigin(0,0)
     }
     update(){
@@ -33,4 +33,4 @@ const config = {
       }
 };
 
-let game = new Phaser.Game(config)
+let game = new Phaser.Game(config);
