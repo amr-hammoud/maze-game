@@ -4,12 +4,12 @@
 
 body {
   background-color: #292929;
-  background-image: url("../assets/game-bg.jpg");
+  background-image: url("../assets/game-bg2.svg");
   width: 100vw;
   height: 100vh;
   overflow-x: hidden;
   animation: slidein 20s;
-  animation-fill-mode: forwards;
+  animation-fill-mode: none;
   animation-iteration-count: infinite;
   animation-direction: alternate;
   font-family: "Berlin Sans FB Demi", sans-serif;
@@ -90,4 +90,6 @@ canvas{
   transform: translate(-50%,-50%);
   margin-top: 50px;
   width: 55%;
+  border-radius: 10px;
+  box-shadow: 5px 5px 7px #0000007b;
 }

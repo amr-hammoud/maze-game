@@ -8,21 +8,45 @@ class Scene1 extends Phaser.Scene
     preload ()
     {
         this.load.image('bg_lvl1', 'assets/game_images/level_backgrouds/Blue.png')
+        this.load.image('bg_home', 'assets/game_images/level_backgrouds/Purple.png')
         this.load.image('bg_lvl2', 'assets/game_images/level_backgrouds/Green.png')
         this.load.image('start_btn', 'assets/game_images/buttons/button-start.png')
+        this.load.image('arrows', 'assets/game_images/buttons/buttons.png')
         this.load.spritesheet('ninja', 'assets/game_images/character/Run (32x32).png', {frameWidth: 32, frameHeight:32})
         this.load.spritesheet('trap', 'assets/game_images/traps/trap(38x38).png', {frameWidth: 38, frameHeight:38})
-
     }
-      
+
     create ()
     {
-        this.background = this.add.tileSprite(200,0,600, 500, 'bg_lvl1' )
+        this.background = this.add.tileSprite(300,0,600, 500, 'bg_home' )
         this.background.setOrigin(0,0)
-        this.start_btn = this.add.image(100,400, 'start_btn')
-        this.start_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelOne'))
+        
+        this.add.text(475,50, "Use the arrows", { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
+        this.add.text(430,300, "To escape the maze", { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
+        this.arrows = this.add.image(480,70,'arrows')
+        this.arrows.setOrigin(0,0)
 
-        this.ninja = this.add.sprite(275,450,'ninja')
+        this.left_panel = this.add.rectangle(0,0,300,500,0x7ab980)
+        this.left_panel.setOrigin(0,0)
+
+        this.message = this.add.text(50,50, "Hello\nNinja!", { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
+        // this.message = this.add.text(50,170, "Please Enter\nYour Name", { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '26px'})
+        
+        this.start_btn = this.add.image(150,400, 'start_btn')
+        this.start_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelOne'))
+        this.start_btn.scale = 1.5
+        this.tweens.add({
+            targets: this.start_btn,
+            scale: 1.3,
+            duration: 500,
+            ease: "Power2",
+            yoyo: true,
+            loop: -1
+        })
+
+
+        this.ninja = this.add.sprite(430,420,'ninja')
+        this.ninja.scale = 2.3
         this.anims.create({
             key:'ninja_anim',
             frames: this.anims.generateFrameNumbers('ninja'),
@@ -31,7 +55,8 @@ class Scene1 extends Phaser.Scene
         })
         this.ninja.play('ninja_anim')
 
-        this.trap = this.add.sprite(225,450,'trap')
+        this.trap = this.add.sprite(345,420,'trap')
+        this.trap.scale = 2
         this.anims.create({
             key:'trap_anim',
             frames: this.anims.generateFrameNumbers('trap'),
@@ -42,9 +67,9 @@ class Scene1 extends Phaser.Scene
 
         this.tweens.add({
             targets: this.ninja,
-            x: 750,
-            y: 450,
-            duration: 2000,
+            x: 850,
+            y: 420,
+            duration: 1600,
             ease: "Power2",
             yoyo: true,
             loop: -1
@@ -52,13 +77,15 @@ class Scene1 extends Phaser.Scene
 
         this.tweens.add({
             targets: this.trap,
-            x: 700,
-            y: 450,
-            duration: 2000,
+            x: 770,
+            y: 420,
+            duration: 1600,
             ease: "Power2",
             yoyo: true,
             loop: -1
         });
+
+        
     }
     update(){
 
@@ -89,39 +116,42 @@ class Scene2Level1 extends Phaser.Scene
 
     }
     create(){
-        this.background = this.add.tileSprite(200,0,600, 500, 'bg_lvl1' )
+        this.background = this.add.tileSprite(300,0,600, 500, 'bg_lvl1' )
         this.background.setOrigin(0,0)
+
+        this.left_panel = this.add.rectangle(0,0,300,500,0x7ab980)
+        this.left_panel.setOrigin(0,0)
+
+        this.min_score = 20
+
+        this.score = 0;
+        this.score_label = this.add.text(50,50, `Score: ${this.score}`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
+
         this.cursorKeys = this.input.keyboard.createCursorKeys()
 
-        // this.wall_border_down = this.physics.add.image(525,450,'wallh_10')
-        // this.wall_border_up = this.physics.add.image(525,50,'wallh_10')
-        // this.wall_border_righ = this.physics.add.image(755,300,'wallv_6')
-        // this.wall_border_left = this.physics.add.image(294,203,'wallv_6')
-        this.big_wall1 = this.physics.add.image(243,203,'big_wall')
+        this.big_wall1 = this.physics.add.image(343,203,'big_wall')
         this.big_wall1.scale = 1.35
-        this.big_wall2 = this.physics.add.image(500,480,'big_wall')
+        this.big_wall2 = this.physics.add.image(600,480,'big_wall')
         this.big_wall2.scale = 0.85
 
-
-
         this.walls_grp = this.physics.add.group()
-        this.walls_grp.add(this.physics.add.image(525,450,'wallh_10'))
-        this.walls_grp.add(this.physics.add.image(525,50,'wallh_10'))
-        this.walls_grp.add(this.physics.add.image(755,300,'wallv_6'))
-        this.walls_grp.add(this.physics.add.image(294,203,'wallv_6'))
-        this.walls_grp.add(this.physics.add.image(530,280,'wallv_2'))
-        this.walls_grp.add(this.physics.add.image(660,280,'wallv_2'))
-        this.walls_grp.add(this.physics.add.image(294,203,'wallv_6'))
-        this.walls_grp.add(this.physics.add.image(420,339,'wallh_5'))
-        this.walls_grp.add(this.physics.add.image(700,339,'wallh_2'))
-        this.walls_grp.add(this.physics.add.image(466,225,'wallh_3'))
-        this.walls_grp.add(this.physics.add.image(570,150,'wallh_8'))
+        this.walls_grp.add(this.physics.add.image(625,450,'wallh_10'))
+        this.walls_grp.add(this.physics.add.image(625,50,'wallh_10'))
+        this.walls_grp.add(this.physics.add.image(855,300,'wallv_6'))
+        this.walls_grp.add(this.physics.add.image(394,203,'wallv_6'))
+        this.walls_grp.add(this.physics.add.image(630,280,'wallv_2'))
+        this.walls_grp.add(this.physics.add.image(760,280,'wallv_2'))
+        this.walls_grp.add(this.physics.add.image(394,203,'wallv_6'))
+        this.walls_grp.add(this.physics.add.image(520,339,'wallh_5'))
+        this.walls_grp.add(this.physics.add.image(800,339,'wallh_2'))
+        this.walls_grp.add(this.physics.add.image(566,225,'wallh_3'))
+        this.walls_grp.add(this.physics.add.image(670,150,'wallh_8'))
         this.walls_grp.add(this.big_wall1)
         this.walls_grp.add(this.big_wall2)
         
         this.fruits_grp = this.physics.add.group()
-        this.apple_1 = this.physics.add.sprite(505,250,'apple')
-        this.apple_2 = this.physics.add.sprite(730,310,'apple')
+        this.apple_1 = this.physics.add.sprite(605,250,'apple')
+        this.apple_2 = this.physics.add.sprite(830,310,'apple')
         this.fruits_grp.add(this.apple_1)
         this.fruits_grp.add(this.apple_2)
         this.anims.create({
@@ -131,28 +161,37 @@ class Scene2Level1 extends Phaser.Scene
             repeat: -1
         })
         this.apple_1.play('apple_anim')
+        this.apple_2.play('apple_anim')
 
-        
-
-        this.trap = this.physics.add.sprite(505,310,'trap')
+        this.trap = this.physics.add.sprite(605,310,'trap')
         this.trap.play('trap_anim')
 
-        this.ninja = this.physics.add.sprite(225,450,'ninja')
+        this.ninja = this.physics.add.sprite(325,450,'ninja')
         this.character_grp = this.physics.add.group()
         this.character_grp.add(this.ninja)
         this.ninja.setCollideWorldBounds(true)
         this.ninja.scale = 1.4
 
         this.ninja.play('ninja_anim')
-        this.physics.world.setBounds(200, 0, 800, 500);
+        this.physics.world.setBounds(300, 0, 900, 500);
 
         this.to_lvl_2 = this.physics.add.sprite(780,100,'to_lvl_2')
         this.to_lvl_2.scale = 2
 
         this.physics.add.collider(this.ninja,this.fruits_grp, (ninja, fruit) => {
             fruit.destroy()
+            this.score +=10
+            this.score_label.text = "Score: " + this.score
         })
-        this.physics.add.collider(this.ninja,this.to_lvl_2, () => this.scene.start('gameLevelTwo'))
+
+        this.physics.add.collider(this.ninja,this.to_lvl_2, () => {
+            if(this.score < 20){
+                this.alert = this.add.text(50,150, `Score at least\n${this.min_score}pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
+                this.alert.setTint(0xed4444)
+            }
+            else
+                this.scene.start('gameLevelTwo')
+        })
 
     }
     update(){
@@ -207,7 +246,7 @@ class Scene3Level2 extends Phaser.Scene
 
     }
     create(){
-        this.background = this.add.tileSprite(200,0,600, 500, 'bg_lvl2' )
+        this.background = this.add.tileSprite(300,0,600, 500, 'bg_lvl2' )
         this.background.setOrigin(0,0)
     }
     update(){
@@ -218,8 +257,12 @@ class Scene3Level2 extends Phaser.Scene
 
 const config = {
     type: Phaser.AUTO,
-    width: 800,
+    width: 900,
     height: 500,
+    parent: "game",
+    dom: {
+        createContainer: true
+    },
     scene: [Scene1, Scene2Level1, Scene3Level2],
     physics: {
         default: "arcade",
