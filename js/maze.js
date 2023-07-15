@@ -14,9 +14,8 @@ class Scene1 extends Phaser.Scene
         this.load.image('arrows', 'assets/game_images/buttons/buttons.png')
         this.load.spritesheet('ninja', 'assets/game_images/character/Run (32x32).png', {frameWidth: 32, frameHeight:32})
         this.load.spritesheet('trap', 'assets/game_images/traps/trap(38x38).png', {frameWidth: 38, frameHeight:38})
-        this.load.html("form", "form.html")
     }
-      
+
     create ()
     {
         this.background = this.add.tileSprite(300,0,600, 500, 'bg_home' )
@@ -119,6 +118,13 @@ class Scene2Level1 extends Phaser.Scene
     create(){
         this.background = this.add.tileSprite(300,0,600, 500, 'bg_lvl1' )
         this.background.setOrigin(0,0)
+
+        this.left_panel = this.add.rectangle(0,0,300,500,0x7ab980)
+        this.left_panel.setOrigin(0,0)
+
+        this.score = 0;
+        this.score_label = this.add.text(50,50, `Score: ${this.score}`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
+
         this.cursorKeys = this.input.keyboard.createCursorKeys()
 
         this.big_wall1 = this.physics.add.image(343,203,'big_wall')
@@ -174,7 +180,10 @@ class Scene2Level1 extends Phaser.Scene
 
         this.physics.add.collider(this.ninja,this.fruits_grp, (ninja, fruit) => {
             fruit.destroy()
+            this.score +=10
+            this.score_label.text = "Score: " + this.score
         })
+        
         this.physics.add.collider(this.ninja,this.to_lvl_2, () => this.scene.start('gameLevelTwo'))
 
     }
