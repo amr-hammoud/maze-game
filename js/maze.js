@@ -14,32 +14,31 @@ class Scene1 extends Phaser.Scene
         this.load.image('arrows', 'assets/game_images/buttons/buttons.png')
         this.load.spritesheet('ninja', 'assets/game_images/character/Run (32x32).png', {frameWidth: 32, frameHeight:32})
         this.load.spritesheet('trap', 'assets/game_images/traps/trap(38x38).png', {frameWidth: 38, frameHeight:38})
-
+        this.load.html("form", "form.html")
     }
       
     create ()
     {
-        this.background = this.add.tileSprite(200,0,600, 500, 'bg_home' )
+        this.background = this.add.tileSprite(300,0,600, 500, 'bg_home' )
         this.background.setOrigin(0,0)
         
-        this.add.text(375,50, "Use the arrows", { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
-        this.add.text(330,300, "To escape the maze", { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
-        this.arrows = this.add.image(380,70,'arrows')
+        this.add.text(475,50, "Use the arrows", { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
+        this.add.text(430,300, "To escape the maze", { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
+        this.arrows = this.add.image(480,70,'arrows')
         this.arrows.setOrigin(0,0)
 
-        this.left_panel = this.add.rectangle(0,0,200,500,0x7ab980)
+        this.left_panel = this.add.rectangle(0,0,300,500,0x7ab980)
         this.left_panel.setOrigin(0,0)
 
-        this.formUtil = new this.formUtil({scene:this,rows:11,cols:11})
-        this.formUtil.showNumbers()
-        this.formUtil.scaleToGameW("player-name",.4)
-        this.formUtil.placeElementAt(60,"player-name")
+        this.message = this.add.text(50,50, "Hello\nNinja!", { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
+        // this.message = this.add.text(50,170, "Please Enter\nYour Name", { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '26px'})
         
-        this.start_btn = this.add.image(100,400, 'start_btn')
+        this.start_btn = this.add.image(150,400, 'start_btn')
         this.start_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelOne'))
+        this.start_btn.scale = 1.5
         this.tweens.add({
             targets: this.start_btn,
-            scale: 1.1,
+            scale: 1.3,
             duration: 500,
             ease: "Power2",
             yoyo: true,
@@ -47,7 +46,7 @@ class Scene1 extends Phaser.Scene
         })
 
 
-        this.ninja = this.add.sprite(275,450,'ninja')
+        this.ninja = this.add.sprite(395,450,'ninja')
         this.ninja.scale = 1.4
         this.anims.create({
             key:'ninja_anim',
@@ -57,7 +56,7 @@ class Scene1 extends Phaser.Scene
         })
         this.ninja.play('ninja_anim')
 
-        this.trap = this.add.sprite(225,450,'trap')
+        this.trap = this.add.sprite(345,450,'trap')
         this.trap.scale = 1.4
         this.anims.create({
             key:'trap_anim',
@@ -69,7 +68,7 @@ class Scene1 extends Phaser.Scene
 
         this.tweens.add({
             targets: this.ninja,
-            x: 750,
+            x: 850,
             y: 450,
             duration: 2000,
             ease: "Power2",
@@ -79,7 +78,7 @@ class Scene1 extends Phaser.Scene
 
         this.tweens.add({
             targets: this.trap,
-            x: 700,
+            x: 800,
             y: 450,
             duration: 2000,
             ease: "Power2",
@@ -242,8 +241,12 @@ class Scene3Level2 extends Phaser.Scene
 
 const config = {
     type: Phaser.AUTO,
-    width: 800,
+    width: 900,
     height: 500,
+    parent: "game",
+    dom: {
+        createContainer: true
+    },
     scene: [Scene1, Scene2Level1, Scene3Level2],
     physics: {
         default: "arcade",
