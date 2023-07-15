@@ -46,8 +46,8 @@ class Scene1 extends Phaser.Scene
         })
 
 
-        this.ninja = this.add.sprite(395,450,'ninja')
-        this.ninja.scale = 1.4
+        this.ninja = this.add.sprite(430,420,'ninja')
+        this.ninja.scale = 2.3
         this.anims.create({
             key:'ninja_anim',
             frames: this.anims.generateFrameNumbers('ninja'),
@@ -56,8 +56,8 @@ class Scene1 extends Phaser.Scene
         })
         this.ninja.play('ninja_anim')
 
-        this.trap = this.add.sprite(345,450,'trap')
-        this.trap.scale = 1.4
+        this.trap = this.add.sprite(345,420,'trap')
+        this.trap.scale = 2
         this.anims.create({
             key:'trap_anim',
             frames: this.anims.generateFrameNumbers('trap'),
@@ -69,8 +69,8 @@ class Scene1 extends Phaser.Scene
         this.tweens.add({
             targets: this.ninja,
             x: 850,
-            y: 450,
-            duration: 2000,
+            y: 420,
+            duration: 1600,
             ease: "Power2",
             yoyo: true,
             loop: -1
@@ -78,9 +78,9 @@ class Scene1 extends Phaser.Scene
 
         this.tweens.add({
             targets: this.trap,
-            x: 800,
-            y: 450,
-            duration: 2000,
+            x: 770,
+            y: 420,
+            duration: 1600,
             ease: "Power2",
             yoyo: true,
             loop: -1
