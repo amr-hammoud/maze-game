@@ -17,6 +17,24 @@ gsap.from(".cloud2",{
     },
     x: 600,
 })
+gsap.from(".bushes",{
+    scrollTrigger : {
+        scrub: true
+
+    },
+    x: -150,
+    scale:1,
+})
+gsap.from(".button",{
+    scrollTrigger : {
+        scrub: true
+
+    },
+    y:400,
+    scale:2,
+})
+
+
 
 
 
