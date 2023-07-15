@@ -122,6 +122,8 @@ class Scene2Level1 extends Phaser.Scene
         this.left_panel = this.add.rectangle(0,0,300,500,0x7ab980)
         this.left_panel.setOrigin(0,0)
 
+        this.min_score = 20
+
         this.score = 0;
         this.score_label = this.add.text(50,50, `Score: ${this.score}`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
 
@@ -131,8 +133,6 @@ class Scene2Level1 extends Phaser.Scene
         this.big_wall1.scale = 1.35
         this.big_wall2 = this.physics.add.image(600,480,'big_wall')
         this.big_wall2.scale = 0.85
-
-
 
         this.walls_grp = this.physics.add.group()
         this.walls_grp.add(this.physics.add.image(625,450,'wallh_10'))
@@ -183,8 +183,15 @@ class Scene2Level1 extends Phaser.Scene
             this.score +=10
             this.score_label.text = "Score: " + this.score
         })
-        
-        this.physics.add.collider(this.ninja,this.to_lvl_2, () => this.scene.start('gameLevelTwo'))
+
+        this.physics.add.collider(this.ninja,this.to_lvl_2, () => {
+            if(this.score < 20){
+                this.alert = this.add.text(50,150, `Score at least\n${this.min_score}pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
+                this.alert.setTint(0xed4444)
+            }
+            else
+                this.scene.start('gameLevelTwo')
+        })
 
     }
     update(){
