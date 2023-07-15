@@ -32,17 +32,43 @@ class Scene2 extends Phaser.Scene
     }
     preload ()
     {
-
-
+        this.load.spritesheet('ninja', 'assets/game_images/character/Run (32x32).png', {frameWidth: 32, frameHeight:32})
     }
     create(){
         this.background = this.add.tileSprite(200,0,600, 500, 'bg_lvl1' )
         this.background.setOrigin(0,0)
+        this.cursorKeys = this.input.keyboard.createCursorKeys()
+        this.ninja = this.add.sprite(250,250,'ninja')
+        this.ninja.scale = 1.4
+        this.anims.create({
+            key:'ninja_anim',
+            frames: this.anims.generateFrameNumbers('ninja'),
+            frameRate:20,
+            repeat: -1
+        })
+        this.ninja.play('ninja_anim')
     }
     update(){
+        this.moving_ninja()
+        
         
     }
-    
+    moving_ninja(){
+        if(this.cursorKeys.up.isDown){
+            this.ninja.y -=3
+        }
+        if(this.cursorKeys.down.isDown){
+            this.ninja.y +=3
+        }
+        if(this.cursorKeys.left.isDown){
+            this.ninja.x -= 3
+            this.ninja.flipX = true
+        }
+        if(this.cursorKeys.right.isDown){
+            this.ninja.x += 3
+            this.ninja.flipX = false
+        }
+    }
 
 }
 
