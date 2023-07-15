@@ -16,3 +16,28 @@ body{
     position: relative;
     height: 100vh;    
 }
+.txt{
+    position: absolute;
+    font-size: 5rem;
+    color: rgb(65, 65, 65);
+   
+}
+.mountain{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+.bushes{
+    position: absolute;
+    top: 20rem;
+    left: 0;
+    right: 20rem;
+    width: 100%;
+}
+.cloud1{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+@import url('https://fonts.cdnfonts.com/css/berlin-sans-fb-demi');
