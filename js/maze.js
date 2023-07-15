@@ -8,6 +8,7 @@ class Scene1 extends Phaser.Scene
     preload ()
     {
         this.load.image('bg_lvl1', 'assets/game_images/level_backgrouds/Blue.png')
+        this.load.image('bg_home', 'assets/game_images/level_backgrouds/Purple.png')
         this.load.image('bg_lvl2', 'assets/game_images/level_backgrouds/Green.png')
         this.load.image('start_btn', 'assets/game_images/buttons/button-start.png')
         this.load.spritesheet('ninja', 'assets/game_images/character/Run (32x32).png', {frameWidth: 32, frameHeight:32})
@@ -17,7 +18,7 @@ class Scene1 extends Phaser.Scene
       
     create ()
     {
-        this.background = this.add.tileSprite(200,0,600, 500, 'bg_lvl1' )
+        this.background = this.add.tileSprite(200,0,600, 500, 'bg_home' )
         this.background.setOrigin(0,0)
         this.start_btn = this.add.image(100,400, 'start_btn')
         this.start_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelOne'))
@@ -93,10 +94,6 @@ class Scene2Level1 extends Phaser.Scene
         this.background.setOrigin(0,0)
         this.cursorKeys = this.input.keyboard.createCursorKeys()
 
-        // this.wall_border_down = this.physics.add.image(525,450,'wallh_10')
-        // this.wall_border_up = this.physics.add.image(525,50,'wallh_10')
-        // this.wall_border_righ = this.physics.add.image(755,300,'wallv_6')
-        // this.wall_border_left = this.physics.add.image(294,203,'wallv_6')
         this.big_wall1 = this.physics.add.image(243,203,'big_wall')
         this.big_wall1.scale = 1.35
         this.big_wall2 = this.physics.add.image(500,480,'big_wall')
@@ -131,8 +128,7 @@ class Scene2Level1 extends Phaser.Scene
             repeat: -1
         })
         this.apple_1.play('apple_anim')
-
-        
+        this.apple_2.play('apple_anim')
 
         this.trap = this.physics.add.sprite(505,310,'trap')
         this.trap.play('trap_anim')
