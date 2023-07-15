@@ -10,6 +10,7 @@ class Scene1 extends Phaser.Scene
         this.load.image('bg_lvl1', 'assets/game_images/level_backgrouds/Blue.png')
         this.load.image('bg_home', 'assets/game_images/level_backgrouds/Purple.png')
         this.load.image('bg_lvl2', 'assets/game_images/level_backgrouds/Green.png')
+        this.load.image('bg_lvl3', 'assets/game_images/level_backgrouds/Gray.png')
         this.load.image('start_btn', 'assets/game_images/buttons/button-start.png')
         this.load.spritesheet('ninja', 'assets/game_images/character/Run (32x32).png', {frameWidth: 32, frameHeight:32})
         this.load.spritesheet('trap', 'assets/game_images/traps/trap(38x38).png', {frameWidth: 38, frameHeight:38})
@@ -33,7 +34,7 @@ class Scene1 extends Phaser.Scene
         this.background = this.add.tileSprite(200,0,600, 500, 'bg_home' )
         this.background.setOrigin(0,0)
         this.start_btn = this.add.image(100,400, 'start_btn')
-        this.start_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelTwo'))
+        this.start_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelOne'))
 
         this.ninja = this.add.sprite(275,450,'ninja')
         this.anims.create({
@@ -87,19 +88,7 @@ class Scene2Level1 extends Phaser.Scene
     }
     preload ()
     {
-        this.load.image('wallh_10', 'assets/game_images/walls/h10.png')
-        this.load.image('wallh_8', 'assets/game_images/walls/h8.png')
-        this.load.image('wallh_5', 'assets/game_images/walls/h5.png')
-        this.load.image('wallh_3', 'assets/game_images/walls/h3.png')
-        this.load.image('wallh_2', 'assets/game_images/walls/h2.png')
-        this.load.image('wallv_6', 'assets/game_images/walls/v6.png')
-        this.load.image('wallv_1', 'assets/game_images/walls/v1.png')
-        this.load.image('wallv_2', 'assets/game_images/walls/v2.png')
-        this.load.image('wallv_3', 'assets/game_images/walls/v3.png')
-        this.load.image('big_wall', 'assets/game_images/walls/Terrain (16x16).png')
-        this.load.image('to_lvl_2', 'assets/game_images/level_ending/02.png')
-        this.load.spritesheet('apple', 'assets/game_images/food/Apple.png', {frameWidth: 32, frameHeight:32})
-
+        
     }
     create(){
         this.background = this.add.tileSprite(200,0,600, 500, 'bg_lvl1' )
@@ -236,19 +225,19 @@ class Scene3Level2 extends Phaser.Scene
         this.walls_grp.add(this.big_wall1)
         this.walls_grp.add(this.big_wall2)
         
-        this.fruits_grp = this.physics.add.group()
-        this.apple_1 = this.physics.add.sprite(505,250,'apple')
-        this.apple_2 = this.physics.add.sprite(730,310,'apple')
-        this.fruits_grp.add(this.apple_1)
-        this.fruits_grp.add(this.apple_2)
-        this.anims.create({
-            key:'apple_anim',
-            frames: this.anims.generateFrameNumbers('apple'),
-            frameRate:20,
-            repeat: -1
-        })
-        this.apple_1.play('apple_anim')
-        this.apple_2.play('apple_anim')
+        // this.fruits_grp = this.physics.add.group()
+        // this.apple_1 = this.physics.add.sprite(505,250,'apple')
+        // this.apple_2 = this.physics.add.sprite(730,310,'apple')
+        // this.fruits_grp.add(this.apple_1)
+        // this.fruits_grp.add(this.apple_2)
+        // this.anims.create({
+        //     key:'apple_anim',
+        //     frames: this.anims.generateFrameNumbers('apple'),
+        //     frameRate:20,
+        //     repeat: -1
+        // })
+        // this.apple_1.play('apple_anim')
+        // this.apple_2.play('apple_anim')
 
         this.traps_grp = this.physics.add.group()
         this.trap1 = this.physics.add.sprite(320,150,'trap')
@@ -288,7 +277,7 @@ class Scene3Level2 extends Phaser.Scene
             fruit.destroy()
         })
         this.physics.add.collider(this.ninja,this.to_lvl_3, () => this.scene.start('gameLevelThree'))
-        this.physics.add.collider(this.ninja,this.traps_grp, () => this.ninja.setPosition(this.ninja.x - 10, this.ninja.y-10))
+        this.physics.add.collider(this.ninja,this.traps_grp, () => this.ninja.setPosition(this.ninja.x - 10, this.ninja.y - 10))
         
     }
     update(){
@@ -316,14 +305,14 @@ class Scene3Level2 extends Phaser.Scene
             this.ninja.flipX = false
         }
 
-        // let walls = this.walls_grp.getChildren()
-        // for (let i = 0; i < walls.length; i++) {
-        //     let wall = walls[i]
+        let walls = this.walls_grp.getChildren()
+        for (let i = 0; i < walls.length; i++) {
+            let wall = walls[i]
 
-        //     if (Phaser.Geom.Intersects.RectangleToRectangle(this.ninja.getBounds(), wall.getBounds())) {
-        //         this.ninja.setPosition(x_before_move, y_before_move)
-        //     }
-        // }
+            if (Phaser.Geom.Intersects.RectangleToRectangle(this.ninja.getBounds(), wall.getBounds())) {
+                this.ninja.setPosition(x_before_move, y_before_move)
+            }
+        }
         // let traps = this.traps_grp.getChildren()
         // for (let i = 0; i < traps.length; i++) {
         //     let trap = traps[i]
@@ -349,7 +338,7 @@ class Scene3Level3 extends Phaser.Scene
 
     }
     create(){
-        this.background = this.add.tileSprite(200,0,600, 500, 'bg_lvl2' )
+        this.background = this.add.tileSprite(200,0,600, 500, 'bg_lvl3' )
         this.background.setOrigin(0,0)
     }
     update(){
