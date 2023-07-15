@@ -67,7 +67,7 @@ body{
     left: 300px;
 }
 
-.hero_section a{
+.button{
     position: absolute;
     top: 350px;
     color: rgb(92, 117, 75);
@@ -79,6 +79,7 @@ body{
     font-size: 1.8rem;
     border-radius: 30px;
 }
-.hero_section > a:hover{
-    color: rgb(255, 255, 255);
+a:hover{
+    color: aliceblue;
 }
+
