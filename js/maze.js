@@ -75,9 +75,18 @@ class Scene2Level1 extends Phaser.Scene
     preload ()
     {
         this.load.image('wallh_10', 'assets/game_images/walls/h10.png')
+        this.load.image('wallh_8', 'assets/game_images/walls/h8.png')
+        this.load.image('wallh_5', 'assets/game_images/walls/h5.png')
+        this.load.image('wallh_3', 'assets/game_images/walls/h3.png')
+        this.load.image('wallh_2', 'assets/game_images/walls/h2.png')
         this.load.image('wallv_6', 'assets/game_images/walls/v6.png')
+        this.load.image('wallv_1', 'assets/game_images/walls/v1.png')
+        this.load.image('wallv_2', 'assets/game_images/walls/v2.png')
+        this.load.image('wallv_3', 'assets/game_images/walls/v3.png')
         this.load.image('big_wall', 'assets/game_images/walls/Terrain (16x16).png')
         this.load.image('to_lvl_2', 'assets/game_images/level_ending/02.png')
+        this.load.spritesheet('apple', 'assets/game_images/food/Apple.png', {frameWidth: 32, frameHeight:32})
+
     }
     create(){
         this.background = this.add.tileSprite(200,0,600, 500, 'bg_lvl1' )
@@ -100,9 +109,33 @@ class Scene2Level1 extends Phaser.Scene
         this.walls_grp.add(this.physics.add.image(525,50,'wallh_10'))
         this.walls_grp.add(this.physics.add.image(755,300,'wallv_6'))
         this.walls_grp.add(this.physics.add.image(294,203,'wallv_6'))
+        this.walls_grp.add(this.physics.add.image(530,280,'wallv_2'))
+        this.walls_grp.add(this.physics.add.image(660,280,'wallv_2'))
+        this.walls_grp.add(this.physics.add.image(294,203,'wallv_6'))
+        this.walls_grp.add(this.physics.add.image(420,339,'wallh_5'))
+        this.walls_grp.add(this.physics.add.image(700,339,'wallh_2'))
+        this.walls_grp.add(this.physics.add.image(466,225,'wallh_3'))
+        this.walls_grp.add(this.physics.add.image(570,150,'wallh_8'))
         this.walls_grp.add(this.big_wall1)
         this.walls_grp.add(this.big_wall2)
         
+        this.fruits_grp = this.physics.add.group()
+        this.apple_1 = this.physics.add.sprite(505,250,'apple')
+        this.apple_2 = this.physics.add.sprite(730,310,'apple')
+        this.fruits_grp.add(this.apple_1)
+        this.fruits_grp.add(this.apple_2)
+        this.anims.create({
+            key:'apple_anim',
+            frames: this.anims.generateFrameNumbers('apple'),
+            frameRate:20,
+            repeat: -1
+        })
+        this.apple_1.play('apple_anim')
+
+        
+
+        this.trap = this.physics.add.sprite(505,310,'trap')
+        this.trap.play('trap_anim')
 
         this.ninja = this.physics.add.sprite(225,450,'ninja')
         this.character_grp = this.physics.add.group()
@@ -116,6 +149,9 @@ class Scene2Level1 extends Phaser.Scene
         this.to_lvl_2 = this.physics.add.sprite(780,100,'to_lvl_2')
         this.to_lvl_2.scale = 2
 
+        this.physics.add.collider(this.ninja,this.fruits_grp, (ninja, fruit) => {
+            fruit.destroy()
+        })
         this.physics.add.collider(this.ninja,this.to_lvl_2, () => this.scene.start('gameLevelTwo'))
 
     }
@@ -151,6 +187,9 @@ class Scene2Level1 extends Phaser.Scene
             if (Phaser.Geom.Intersects.RectangleToRectangle(this.ninja.getBounds(), wall.getBounds())) {
                 this.ninja.setPosition(x_before_move, y_before_move)
             }
+    }
+    if (Phaser.Geom.Intersects.RectangleToRectangle(this.ninja.getBounds(), this.trap.getBounds())) {
+        this.ninja.setPosition(x_before_move -20 , y_before_move)
     }
     }
 
