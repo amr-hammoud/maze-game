@@ -85,3 +85,11 @@ a:hover {
   background-color: #57b587;
   box-shadow: 20px 20px 0px black;
 }
+.turtle{
+  position: absolute;
+  right: 0;
+  top: 28rem;
+  width: 40%;
+  height: 60%;
+  
+}

@@ -34,6 +34,13 @@ gsap.from(".button",{
     x:700,
     opacity:0,
 })
+gsap.from(".turtle",{
+    scrollTrigger : {
+        scrub: 1
+
+    },
+    x: 600,
+})
 
 
 
