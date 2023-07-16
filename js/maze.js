@@ -485,6 +485,12 @@ class Scene4Level3 extends Phaser.Scene
         this.load.image('v5', 'assets/game_images/walls/v5.png')
         this.load.image('h7', 'assets/game_images/walls/h7.png')
         this.load.image('v7', 'assets/game_images/walls/v7.png')
+        this.load.image('h3', 'assets/game_images/walls/h3.png')
+        this.load.image('h10', 'assets/game_images/walls/h10.png')
+        this.load.image('to_lvl_4', 'assets/game_images/level_ending/04.png')
+
+
+        this.load.image('terain', 'assets/game_images/walls/Terrain (16x16).png')
         this.load.spritesheet('ninja', 'assets/game_images/character/Run (32x32).png', {frameWidth: 32, frameHeight:32})
         this.load.spritesheet('trap', 'assets/game_images/traps/trap(38x38).png', {frameWidth: 38, frameHeight:38})
     }
@@ -512,8 +518,29 @@ class Scene4Level3 extends Phaser.Scene
         this.walls_grp.add(this.physics.add.image(375,205,'v7'))
         this.walls_grp.add(this.physics.add.image(680,250,'h1'))
         this.walls_grp.add(this.physics.add.image(550,350,'h1'))
-        this.walls_grp.add(this.physics.add.image(540,30,'h7'))
+        this.walls_grp.add(this.physics.add.image(620,30,'h10'))
         this.walls_grp.add(this.physics.add.image(500,490,'h7'))
+        this.walls_grp.add(this.physics.add.image(335,350,'terain'))
+        this.walls_grp.add(this.physics.add.image(600,490,'h10'))
+        this.walls_grp.add(this.physics.add.image(500,490,'h3'))
+
+        this.traps_grp = this.physics.add.group()
+        this.trap1 = this.physics.add.sprite(520,450,'trap')
+        this.trap2 = this.physics.add.sprite(520,400,'trap')
+        this.trap3 = this.physics.add.sprite(600,450,'trap')
+        this.trap4 = this.physics.add.sprite(640,400,'trap')
+        this.trap5 = this.physics.add.sprite(520,200,'trap')
+        this.trap6 = this.physics.add.sprite(520,250,'trap')
+        this.trap7 = this.physics.add.sprite(520,150,'trap')
+        this.trap8 = this.physics.add.sprite(520,100,'trap')
+        this.trap9 = this.physics.add.sprite(850,350,'trap')
+        this.trap10 = this.physics.add.sprite(800,310,'trap')
+        this.trap11 = this.physics.add.sprite(720,450,'trap')
+        this.trap12 = this.physics.add.sprite(720,120,'trap')
+
+        this.physics.add.image(880,420,"to_lvl_4")
+        
+
 
 
         
