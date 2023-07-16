@@ -386,6 +386,7 @@ class Scene3Level3 extends Phaser.Scene
 
 }
 
+
 const config = {
     type: Phaser.AUTO,
     width: 800,
