@@ -42,8 +42,6 @@ class Scene1 extends Phaser.Scene
             yoyo: true,
             loop: -1
         })
-    this.left_panel = this.add.rectangle(0, 0, 300, 500, 0x7ab980);
-    this.left_panel.setOrigin(0, 0);
 
 
         this.ninja = this.add.sprite(430,420,'ninja')
@@ -194,8 +192,8 @@ class Scene2Level1 extends Phaser.Scene
         this.to_lvl_2 = this.physics.add.sprite(780,100,'to_lvl_2')
         this.to_lvl_2.scale = 2
 
-        this.physics.add.collider(this.ninja,this.trap, () => {
-            this.score -=5
+        this.physics.add.collider(this.ninja,this.trap, (ninja, trap) => {
+            this.score -=10
             this.score_label.text = "Score: " + this.score
         })
 
@@ -247,16 +245,6 @@ class Scene2Level1 extends Phaser.Scene
     if (Phaser.Geom.Intersects.RectangleToRectangle(this.ninja.getBounds(), this.trap.getBounds())) {
         this.ninja.setPosition(x_before_move -20 , y_before_move)
     }
-    if (this.cursorKeys.down.isDown) {
-      this.ninja.y += 3;
-    }
-    if (this.cursorKeys.left.isDown) {
-      this.ninja.x -= 3;
-      this.ninja.flipX = true;
-    }
-    if (this.cursorKeys.right.isDown) {
-      this.ninja.x += 3;
-      this.ninja.flipX = false;
     }
 
 }
