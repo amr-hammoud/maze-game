@@ -598,6 +598,10 @@ class levely extends Phaser.Scene
         this.min_score = 50
         this.alert = this.add.text(50,100, `Score at least\n${this.min_score}pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
 
+        this.hint = this.add.text(100,220, `: +10pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
+        this.apple_hint = this.physics.add.sprite(70,240,'cherries')
+        this.apple_hint.scale = 3
+
     }
     update(){
 
