@@ -595,12 +595,12 @@ class levely extends Phaser.Scene
         this.score = 0
         this.score_label = this.add.text(50,30, `Score: ${this.score}`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
 
-        this.min_score = 50
+        this.min_score = 40
         this.alert = this.add.text(50,100, `Score at least\n${this.min_score}pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
 
         this.hint = this.add.text(100,220, `: +10pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
-        this.apple_hint = this.physics.add.sprite(70,240,'cherries')
-        this.apple_hint.scale = 3
+        this.cherries_hint = this.physics.add.sprite(70,240,'cherries')
+        this.cherries_hint.scale = 3
 
         this.hint2 = this.add.text(100,270, `: -5pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
         this.trap_hint = this.physics.add.sprite(70,290,'trap')
@@ -616,6 +616,40 @@ class levely extends Phaser.Scene
         this.walls_grp.add(this.physics.add.image(855,300,'wallv_8'))
         this.walls_grp.add(this.physics.add.image(610,480,'wallh_10'))
         this.walls_grp.add(this.physics.add.image(360,300,'wallv_8'))
+        this.walls_grp.add(this.physics.add.image(600,250,'wallv_6'))
+        this.walls_grp.add(this.physics.add.image(550,400,'wallh_2'))
+        this.walls_grp.add(this.physics.add.image(740,200,'wallh_2'))
+
+        this.fruits_grp = this.physics.add.group()
+        
+        this.cherries_1 = this.physics.add.sprite(570,370,'cherries')
+        this.cherries_2 = this.physics.add.sprite(830,450,'cherries')
+        this.cherries_3 = this.physics.add.sprite(750,220,'cherries')
+        this.cherries_4 = this.physics.add.sprite(400,150,'cherries')
+        this.fruits_grp.add(this.cherries_1)
+        this.fruits_grp.add(this.cherries_2)
+        this.fruits_grp.add(this.cherries_3)
+        this.fruits_grp.add(this.cherries_4)
+        this.cherries_1.scale = 2
+        this.cherries_2.scale = 2
+        this.cherries_3.scale = 2
+        this.cherries_4.scale = 2
+
+        
+        this.cherries_4.visible = false;
+        
+
+        this.anims.create({
+            key:'cherries_anim',
+            frames: this.anims.generateFrameNumbers('cherries'),
+            frameRate:20,
+            repeat: -1
+        })
+        this.cherries_1.play('cherries_anim')
+        this.cherries_2.play('cherries_anim')
+        this.cherries_3.play('cherries_anim')
+        this.cherries_4.play('cherries_anim')
+        this.cherries_hint.play('cherries_anim')
        
 
         
@@ -628,7 +662,7 @@ class levely extends Phaser.Scene
     }
     update()
     {
-        this.moving_ninja();
+        //this.moving_ninja();
     }
 
     moving_ninja(){
@@ -676,7 +710,7 @@ const config = {
     physics: {
         default: "arcade",
         arcade: {
-          debug: false
+          debug: true
         }
       }
 };
