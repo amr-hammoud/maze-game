@@ -359,6 +359,11 @@ class Scene5Level4 extends Phaser.Scene {
 		this.to_lvl_5 = this.physics.add.sprite(780, 120, "to_lvl_5");
 		this.to_lvl_5.scale = 2;
 
+		this.physics.add.collider(this.ninja, this.to_lvl_2, () => {
+			// TODO Link This to next level
+			// if (this.score >= 20) this.scene.start("gameLevelTwo");
+		});
+
 		this.ninja = this.physics.add.sprite(350, 100, "ninja");
 		this.ninja.setCollideWorldBounds(true);
 		this.ninja.scale = 1.4;
