@@ -160,6 +160,7 @@ class Scene5Level4 extends Phaser.Scene {
 			"big_wall_silver",
 			"assets/game_images/walls/TerrainSilver(16x16).png"
 		);
+		this.load.image("to_lvl_5", "assets/game_images/level_ending/05.png");
 	}
 	create() {
 		this.background = this.add.tileSprite(300, 0, 600, 500, "bg_lvl4");
@@ -354,6 +355,9 @@ class Scene5Level4 extends Phaser.Scene {
 		this.strawberry_hint.play("strawberry_anim");
 
 		this.trap_hint.play("trap_anim");
+
+		this.to_lvl_5 = this.physics.add.sprite(780, 120, "to_lvl_5");
+		this.to_lvl_5.scale = 2;
 
 		this.ninja = this.physics.add.sprite(350, 100, "ninja");
 		this.ninja.setCollideWorldBounds(true);
