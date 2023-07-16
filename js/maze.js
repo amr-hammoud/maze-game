@@ -530,6 +530,11 @@ class Scene5Level4 extends Phaser.Scene {
 			"assets/game_images/food/Strawberry.png",
 			{ frameWidth: 32, frameHeight: 32 }
 		);
+		this.load.spritesheet(
+			"endGameFlag",
+			"assets/game_images/level_ending/endgame(64x64).png",
+			{ frameWidth: 64, frameHeight: 64 }
+		);
 		this.load.image(
 			"bg_lvl4",
 			"assets/game_images/level_backgrouds/Brown.png"
@@ -734,10 +739,15 @@ class Scene5Level4 extends Phaser.Scene {
 
 		this.trap_hint.play("trap_anim");
 
-		this.to_lvl_5 = this.physics.add.sprite(780, 120, "to_lvl_5");
-		this.to_lvl_5.scale = 2;
-
-		
+		this.to_end = this.physics.add.sprite(790, 120, "endGameFlag");
+		this.to_end.scale = 1;
+        this.anims.create({
+			key: "flag_anim",
+			frames: this.anims.generateFrameNumbers("endGameFlag"),
+			frameRate: 20,
+			repeat: -1,
+		});
+		this.to_end.play("flag_anim")
 
 		this.ninja = this.physics.add.sprite(350, 100, "ninja");
 		this.ninja.setCollideWorldBounds(true);
@@ -762,7 +772,7 @@ class Scene5Level4 extends Phaser.Scene {
             global_score -= 0.5
 			this.score_label.text = "Score: " + this.score;
 		});
-        this.physics.add.collider(this.ninja, this.to_lvl_5, () => {
+        this.physics.add.collider(this.ninja, this.to_end, () => {
 			if (this.score >= 30) {
                 this.scene.start('gameEnding')}
 		});
@@ -868,12 +878,12 @@ const config = {
     width: 900,
     height: 500,
     parent: 'game',
-    scene: [Scene1, Scene2Level1, Scene3Level2, Scene5Level4, EndingScene],
+    scene: [Scene1, Scene2Level1, Scene3Level2,Scene4Level3, Scene5Level4, EndingScene],
     backgroundColor: "#23444d",
     physics: {
         default: "arcade",
         arcade: {
-          debug: false
+          debug: true
         }
       }
 };
