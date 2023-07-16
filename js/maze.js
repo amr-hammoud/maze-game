@@ -206,7 +206,7 @@ class Scene2Level1 extends Phaser.Scene
 
         this.physics.add.collider(this.ninja,this.to_lvl_2, () => {
             if(this.score >= 20)
-                this.scene.start('gameLevelTwo')
+                this.scene.start('level_y')
         })
 
 
@@ -571,15 +571,16 @@ class levely extends Phaser.Scene
         this.load.image('wallh_3', 'assets/game_images/walls/h3.png')
         this.load.image('wallh_2', 'assets/game_images/walls/h2.png')
         this.load.image('wallv_6', 'assets/game_images/walls/v6.png')
-        this.load.image('wallv_1', 'assets/game_images/walls/v1.png')
+        this.load.image('wallv_7', 'assets/game_images/walls/v7.png')
         this.load.image('wallv_2', 'assets/game_images/walls/v2.png')
         this.load.image('wallv_8', 'assets/game_images/walls/v8.png')
 
         this.load.image('big_wall', 'assets/game_images/walls/Terrain (16x16).png')
-        this.load.image('to_lvl_2', 'assets/game_images/level_ending/02.png')
+        this.load.image('to_lvl_5', 'assets/game_images/level_ending/05.png')
         this.load.spritesheet('apple', 'assets/game_images/food/Apple.png', {frameWidth: 32, frameHeight:32})
         this.load.spritesheet('cherries', 'assets/game_images/food/Cherries.png', {frameWidth: 32, frameHeight:32})
         this.load.image('reset_btn', 'assets/game_images/buttons/reset_button.png')
+        this.load.image('to_lvl_2', 'assets/game_images/level_ending/02.png')
 
 
     }
@@ -612,20 +613,19 @@ class levely extends Phaser.Scene
         this.cursorKeys = this.input.keyboard.createCursorKeys()
 
         this.walls_grp = this.physics.add.group()
-        this.walls_grp.add(this.physics.add.image(625,20,'wallh_10'))
-        this.walls_grp.add(this.physics.add.image(855,300,'wallv_8'))
-        this.walls_grp.add(this.physics.add.image(610,480,'wallh_10'))
-        this.walls_grp.add(this.physics.add.image(360,300,'wallv_8'))
+        this.walls_grp.add(this.physics.add.image(625,40,'wallh_10'))
+        this.walls_grp.add(this.physics.add.image(855,300,'wallv_7'))
+        this.walls_grp.add(this.physics.add.image(610,460,'wallh_10'))
+        this.walls_grp.add(this.physics.add.image(360,300,'wallv_7'))
         this.walls_grp.add(this.physics.add.image(600,250,'wallv_6'))
-        this.walls_grp.add(this.physics.add.image(550,400,'wallh_2'))
+        this.walls_grp.add(this.physics.add.image(550,380,'wallh_2'))
         this.walls_grp.add(this.physics.add.image(740,200,'wallh_2'))
 
         this.fruits_grp = this.physics.add.group()
-        
-        this.cherries_1 = this.physics.add.sprite(570,370,'cherries')
-        this.cherries_2 = this.physics.add.sprite(830,450,'cherries')
+        this.cherries_1 = this.physics.add.sprite(570,350,'cherries')
+        this.cherries_2 = this.physics.add.sprite(830,430,'cherries')
         this.cherries_3 = this.physics.add.sprite(750,220,'cherries')
-        this.cherries_4 = this.physics.add.sprite(400,150,'cherries')
+        this.cherries_4 = this.physics.add.sprite(400,170,'cherries')
         this.fruits_grp.add(this.cherries_1)
         this.fruits_grp.add(this.cherries_2)
         this.fruits_grp.add(this.cherries_3)
@@ -650,6 +650,35 @@ class levely extends Phaser.Scene
         this.cherries_3.play('cherries_anim')
         this.cherries_4.play('cherries_anim')
         this.cherries_hint.play('cherries_anim')
+        
+        this.trap = this.physics.add.sprite(600,70,'trap')
+        this.trap.scale = 1
+        this.trap.play('trap_anim')
+        this.trap_hint.play('trap_anim')
+
+        this.ninja = this.physics.add.sprite(325,50,'ninja')
+        this.ninja.setCollideWorldBounds(true)
+        this.ninja.scale = 1.4
+
+        this.ninja.play('ninja_anim')
+        this.physics.world.setBounds(300, 0, 900, 500);
+
+        this.to_lvl_2 = this.physics.add.sprite(750,100,'to_lvl_2')
+        this.to_lvl_2.scale = 2
+
+        
+
+        this.physics.add.collider(this.ninja,this.fruits_grp, (ninja, fruit) => {
+            fruit.destroy()
+            this.score +=10
+            this.score_label.text = "Score: " + this.score
+        })
+
+        this.physics.add.collider(this.ninja,this.to_lvl_2, () => {
+            if(this.score >= 20)
+                this.scene.start('to_lvl_2')
+        })
+        
        
 
         
@@ -660,11 +689,11 @@ class levely extends Phaser.Scene
 
 
     }
-    update()
-    {
-        //this.moving_ninja();
-    }
+    update(){
+       this.moving_ninja()
 
+        
+    }
     moving_ninja(){
 
         let x_before_move = this.ninja.x
