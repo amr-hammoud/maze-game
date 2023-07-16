@@ -24,6 +24,7 @@ body {
   top: 100px;
   font-size: 2rem;
   color: rgb(65, 65, 65);
+  text-shadow: 0 0 15px white;
   letter-spacing: 5px;
 }
 .mountain {
@@ -51,6 +52,7 @@ body {
   height: 50%;
   top: 0;
   left: 0;
+  mix-blend-mode: multiply;
 }
 .cloud1 {
   position: absolute;
@@ -81,6 +83,6 @@ body {
   transition: 0.3s;
 }
 a:hover {
-  color: white;
+  color: aliceblue;
   background-color: #57b587;
 }
