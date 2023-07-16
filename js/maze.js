@@ -470,7 +470,7 @@ class Scene3Level2 extends Phaser.Scene
 
 }
 
-class Scene3Level3 extends Phaser.Scene
+class Scene4Level3 extends Phaser.Scene
 {
     constructor ()
     {
@@ -478,7 +478,7 @@ class Scene3Level3 extends Phaser.Scene
     }
     preload ()
     {
-
+        this.load.image('reset_btn', 'assets/game_images/buttons/reset_button.png')
         this.load.image('big_wall_silver', 'assets/game_images/walls/TerrainSilver(16x16).png')
     }
     create(){
@@ -491,6 +491,46 @@ class Scene3Level3 extends Phaser.Scene
         this.score_label = this.add.text(50,30, `Score: ${this.score}`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
 
         this.alert = this.add.text(50,100, `CAREFUL!\n Hidden traps \n are around ;D\n\n`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
+        this.hint = this.add.text(100,220, `: +10pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
+        this.apple_hint = this.physics.add.sprite(70,240,'apple')
+        this.apple_hint.scale = 3
+        this.hint2 = this.add.text(100,270, `: -5pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
+        this.trap_hint = this.physics.add.sprite(70,290,'trap')
+        this.reset_btn = this.add.image(150,400, 'reset_btn')
+        this.reset_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelThree'))
+        this.reset_btn.scale = 0.3
+
+
+      
+        
+    }
+    update(){
+    }
+    
+
+}
+
+class Scene5Level4 extends Phaser.Scene
+{
+    constructor ()
+    {
+        super('gameLevelFour');
+    }
+    preload ()
+    {
+        this.load.image('reset_btn', 'assets/game_images/buttons/reset_button.png')
+        this.load.image('big_wall_silver', 'assets/game_images/walls/Pink.png')
+    }
+    create(){
+        this.background = this.add.tileSprite(300,0,600, 500, 'bg_lvl3' )
+        this.background.setOrigin(0,0)
+
+        this.left_panel = this.add.rectangle(0,0,300,500,0x7ab980)
+        this.left_panel.setOrigin(0,0)
+        this.score = 0
+        this.score_label = this.add.text(50,30, `Score: ${this.score}`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
+
+        this.alert = this.add.text(50,100, `Time\nManagement`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
         this.hint = this.add.text(100,220, `: +10pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
         this.apple_hint = this.physics.add.sprite(70,240,'apple')
         this.apple_hint.scale = 3
