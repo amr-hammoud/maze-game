@@ -509,10 +509,6 @@ class Scene4Level3 extends Phaser.Scene
         this.reset_btn = this.add.image(150,400, 'reset_btn')
         this.reset_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelThree'))
         this.reset_btn.scale = 0.3
-
-
-      
-        
     }
     update(){
     }
@@ -520,9 +516,195 @@ class Scene4Level3 extends Phaser.Scene
 
 }
 
-class Scene5Level4 extends Phaser.Scene {
+class Scene5level4 extends Phaser.Scene
+{
+    constructor ()
+    {
+        super('gameLevelFour');
+    }
+    preload ()
+    {
+        this.load.image('bg_level3', 'assets/game_images/level_backgrouds/Pink.png')
+        this.load.image('wallh_10', 'assets/game_images/walls/h10.png')
+        this.load.image('wallh_2', 'assets/game_images/walls/h2.png')
+        this.load.image('wallv_6', 'assets/game_images/walls/v6.png')
+        this.load.image('wallv_7', 'assets/game_images/walls/v7.png')
+        this.load.image('to_lvl_4', 'assets/game_images/level_ending/04.png')
+        this.load.spritesheet('cherries', 'assets/game_images/food/Cherries.png', {frameWidth: 32, frameHeight:32})
+    }
+      
+    create ()
+    {
+        this.background = this.add.tileSprite(300,0,600, 500, 'bg_level3' )
+        this.background.setOrigin(0,0)
+
+        this.left_panel = this.add.rectangle(0,0,300,500,0x7ab980)
+        this.left_panel.setOrigin(0,0)
+
+        this.score = 0
+        this.score_label = this.add.text(50,30, `Score: ${this.score}`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
+
+        this.min_score = 40
+        this.alert = this.add.text(50,100, `Score at least\n${this.min_score}pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
+
+        this.hint = this.add.text(100,220, `: +10pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
+        this.cherries_hint = this.physics.add.sprite(70,240,'cherries')
+        this.cherries_hint.scale = 3
+
+        this.hint2 = this.add.text(100,270, `: -5pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
+        this.trap_hint = this.physics.add.sprite(70,290,'trap')
+
+        this.reset_btn = this.add.image(150,400, 'reset_btn')
+        this.reset_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelFour'))
+        this.reset_btn.scale = 0.3
+
+        this.cursorKeys = this.input.keyboard.createCursorKeys()
+
+        this.walls_grp = this.physics.add.group()
+        this.walls_grp.add(this.physics.add.image(625,40,'wallh_10'))
+        this.walls_grp.add(this.physics.add.image(860,300,'wallv_7'))
+        this.walls_grp.add(this.physics.add.image(610,460,'wallh_10'))
+        this.walls_grp.add(this.physics.add.image(360,300,'wallv_7'))
+        this.walls_grp.add(this.physics.add.image(608,244,'wallv_6'))
+        this.walls_grp.add(this.physics.add.image(550,380,'wallh_2'))
+        this.walls_grp.add(this.physics.add.image(740,200,'wallh_2'))
+
+        this.fruits_grp = this.physics.add.group()
+        this.cherries_1 = this.physics.add.sprite(570,350,'cherries')
+        this.cherries_2 = this.physics.add.sprite(830,430,'cherries')
+        this.cherries_3 = this.physics.add.sprite(750,220,'cherries')
+        this.cherries_4 = this.physics.add.sprite(400,170,'cherries')
+        this.fruits_grp.add(this.cherries_1)
+        this.fruits_grp.add(this.cherries_2)
+        this.fruits_grp.add(this.cherries_3)
+        this.fruits_grp.add(this.cherries_4)
+        this.cherries_1.scale = 2
+        this.cherries_2.scale = 2
+        this.cherries_3.scale = 2
+        this.cherries_4.scale = 2
+    
+        this.cherries_4.visible = false;
+        
+        this.anims.create({
+            key:'cherries_anim',
+            frames: this.anims.generateFrameNumbers('cherries'),
+            frameRate:20,
+            repeat: -1
+        })
+        this.cherries_1.play('cherries_anim')
+        this.cherries_2.play('cherries_anim')
+        this.cherries_3.play('cherries_anim')
+        this.cherries_4.play('cherries_anim')
+        this.cherries_hint.play('cherries_anim')
+
+        this.traps_grp = this.physics.add.group()
+        this.trap1 = this.physics.add.sprite(600,70,'trap')
+        this.trap2 = this.physics.add.sprite(570,290,'trap')
+        this.trap3 = this.physics.add.sprite(570,150,'trap')
+        this.trap4 = this.physics.add.sprite(400,360,'trap')
+        this.trap5 = this.physics.add.sprite(730,300,'trap')
+        this.trap6 = this.physics.add.sprite(820,180,'trap')
+        this.trap7 = this.physics.add.sprite(750,420,'trap')
+        this.trap8 = this.physics.add.sprite(390,220,'trap')
+        this.trap9 = this.physics.add.sprite(740,70,'trap')
+
+        this.traps_grp.add(this.trap1)
+        this.traps_grp.add(this.trap2)
+        this.traps_grp.add(this.trap3)
+        this.traps_grp.add(this.trap4)
+        this.traps_grp.add(this.trap5)
+        this.traps_grp.add(this.trap6)
+        this.traps_grp.add(this.trap7)
+        this.traps_grp.add(this.trap8)
+        this.traps_grp.add(this.trap9)
+
+      
+        this.trap1.play('trap_anim')
+        this.trap2.play('trap_anim')
+        this.trap3.play('trap_anim')
+        this.trap4.play('trap_anim')
+        this.trap5.play('trap_anim')
+        this.trap6.play('trap_anim')
+        this.trap7.play('trap_anim')
+        this.trap8.play('trap_anim')
+        this.trap9.play('trap_anim')
+
+        this.trap4.visible = false;
+        this.trap1.scale = 1
+        this.trap1.visible = false;
+        this.trap_hint.play('trap_anim')
+        this.trap2.scale = 1
+        this.trap2.visible = false;
+        this.trap7.visible = false;
+        this.trap6.visible = false;
+        this.trap8.visible = false;
+
+        this.ninja = this.physics.add.sprite(325,50,'ninja')
+        this.ninja.setCollideWorldBounds(true)
+        this.ninja.scale = 1.4
+
+        this.ninja.play('ninja_anim')
+        this.physics.world.setBounds(300, 0, 900, 500);
+
+        this.to_lvl_4 = this.physics.add.sprite(850,100,'to_lvl_4')
+        this.to_lvl_4.scale = 2
+
+        this.physics.add.collider(this.ninja,this.fruits_grp, (ninja, fruit) => {
+            fruit.destroy()
+            this.score +=10
+            global_score += 10
+            this.score_label.text = "Score: " + this.score
+        })
+
+        this.physics.add.collider(this.ninja,this.to_lvl_4, () => {
+            if(this.score >= 40)
+                this.scene.start('gameLevelFive')
+        })
+        this.physics.add.collider(this.ninja,this.traps_grp, () => {
+            this.ninja.setPosition(this.ninja.x - 10, this.ninja.y - 10)
+            this.score -= 5
+            global_score -= 5
+            this.score_label.text = "Score: " + this.score
+                }
+            )
+    }
+    update(){
+       this.moving_ninja()
+    }
+    moving_ninja(){
+
+        let x_before_move = this.ninja.x
+        let y_before_move = this.ninja.y
+
+        if(this.cursorKeys.up.isDown){
+            this.ninja.y -= 3
+        }
+        if(this.cursorKeys.down.isDown){
+            this.ninja.y += 3
+        }
+        if(this.cursorKeys.left.isDown){
+            this.ninja.x -= 3
+            this.ninja.flipX = true
+        }
+        if(this.cursorKeys.right.isDown){
+            this.ninja.x += 3
+            this.ninja.flipX = false
+        }
+
+        let walls = this.walls_grp.getChildren()
+        for (let i = 0; i < walls.length; i++) {
+            let wall = walls[i]
+
+            if (Phaser.Geom.Intersects.RectangleToRectangle(this.ninja.getBounds(), wall.getBounds())) {
+                this.ninja.setPosition(x_before_move, y_before_move)
+            }
+    }
+    }
+}
+
+class Scene6Level5 extends Phaser.Scene {
 	constructor() {
-		super("gameLevelFour");
+		super("gameLevelFive");
 	}
 	preload() {
 		this.load.spritesheet(
@@ -575,7 +757,7 @@ class Scene5Level4 extends Phaser.Scene {
 		this.reset_btn = this.add.image(150, 400, "reset_btn");
 		this.reset_btn
 			.setInteractive({ useHandCursor: true })
-			.on("pointerdown", () => this.scene.start("gameLevelFour"));
+			.on("pointerdown", () => this.scene.start("gameLevelFive"));
 		this.reset_btn.scale = 0.3;
 
 		this.cursorKeys = this.input.keyboard.createCursorKeys();
@@ -878,7 +1060,7 @@ const config = {
     width: 900,
     height: 500,
     parent: 'game',
-    scene: [Scene1, Scene2Level1, Scene3Level2,Scene4Level3, Scene5Level4, EndingScene],
+    scene: [Scene1, Scene2Level1, Scene3Level2,Scene4Level3, Scene5level4, Scene6Level5, EndingScene],
     backgroundColor: "#23444d",
     physics: {
         default: "arcade",
