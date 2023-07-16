@@ -595,6 +595,9 @@ class levely extends Phaser.Scene
         this.score = 0
         this.score_label = this.add.text(50,30, `Score: ${this.score}`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
 
+        this.min_score = 50
+        this.alert = this.add.text(50,100, `Score at least\n${this.min_score}pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
+
     }
     update(){
 
