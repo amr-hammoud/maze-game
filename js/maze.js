@@ -465,6 +465,7 @@ class Scene3Level2 extends Phaser.Scene
             }
             
         }
+        
 
     }
     
@@ -525,21 +526,20 @@ class Scene4Level3 extends Phaser.Scene
         this.walls_grp.add(this.physics.add.image(500,490,'h3'))
 
         this.traps_grp = this.physics.add.group()
-        this.trap1 = this.physics.add.sprite(520,450,'trap')
-        this.trap2 = this.physics.add.sprite(520,400,'trap')
-        this.trap3 = this.physics.add.sprite(600,450,'trap')
-        this.trap4 = this.physics.add.sprite(640,400,'trap')
-        this.trap5 = this.physics.add.sprite(520,200,'trap')
-        this.trap6 = this.physics.add.sprite(520,250,'trap')
-        this.trap7 = this.physics.add.sprite(520,150,'trap')
-        this.trap8 = this.physics.add.sprite(520,100,'trap')
-        this.trap9 = this.physics.add.sprite(850,350,'trap')
-        this.trap10 = this.physics.add.sprite(800,310,'trap')
-        this.trap11 = this.physics.add.sprite(720,450,'trap')
-        this.trap12 = this.physics.add.sprite(720,120,'trap')
+        this.traps_grp.add(this.physics.add.sprite(520,450,'trap'))
+        this.traps_grp.add(this.physics.add.sprite(520,400,'trap'))
+        this.traps_grp.add(this.physics.add.sprite(600,450,'trap'))
+        this.traps_grp.add(this.physics.add.sprite(640,400,'trap'))
+        this.traps_grp.add(this.physics.add.sprite(520,200,'trap'))
+        this.traps_grp.add(this.physics.add.sprite(520,250,'trap'))
+        this.traps_grp.add(this.physics.add.sprite(520,150,'trap'))
+        this.traps_grp.add(this.physics.add.sprite(520,100,'trap'))
+        this.traps_grp.add(this.physics.add.sprite(850,350,'trap'))
+        this.traps_grp.add(this.physics.add.sprite(800,310,'trap'))
+        this.traps_grp.add(this.physics.add.sprite(720,450,'trap'))
+        this.traps_grp.add(this.physics.add.sprite(720,120,'trap'))
 
         this.physics.add.image(880,420,"to_lvl_4")
-        
 
 
 
@@ -556,8 +556,14 @@ class Scene4Level3 extends Phaser.Scene
         this.cursorKeys = this.input.keyboard.createCursorKeys()
 
 
-  
+        this.physics.add.collider(this.ninja, this.traps_grp, () => {
+			this.score -= 0.5;
+            global_score -= 0.5
+			this.score_label.text = "Score: " + this.score;
+		});
     }
+
+    
     update(){
         this.moving_ninja()
 
