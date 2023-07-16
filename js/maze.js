@@ -47,7 +47,7 @@ class Scene1 extends Phaser.Scene
         this.message = this.add.text(50,50, "Hello\nNinja!", { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
         
         this.start_btn = this.add.image(150,400, 'start_btn')
-        this.start_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelThree'))
+        this.start_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelOne'))
         this.start_btn.scale = 1.5
         this.tweens.add({
             targets: this.start_btn,
