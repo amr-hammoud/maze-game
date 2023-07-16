@@ -540,11 +540,8 @@ class Scene4Level3 extends Phaser.Scene
         this.traps_grp.add(this.physics.add.sprite(720,120,'trap'))
 
         this.physics.add.image(880,420,"to_lvl_4")
-
-
-
         
-        this.ninja = this.add.sprite(350,420,'ninja')
+        this.ninja = this.physics.add.sprite(350,420,'ninja')
         this.ninja.scale = 2.3
         this.anims.create({
             key:'ninja_anim',
@@ -557,8 +554,7 @@ class Scene4Level3 extends Phaser.Scene
 
 
         this.physics.add.collider(this.ninja, this.traps_grp, () => {
-			this.score -= 0.5;
-            global_score -= 0.5
+            this.ninja.setPosition(this.ninja.x =350, this.ninja.y =420)
 			this.score_label.text = "Score: " + this.score;
 		});
     }
