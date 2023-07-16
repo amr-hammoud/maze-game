@@ -38,7 +38,6 @@ class Scene1 extends Phaser.Scene {
     this.arrows = this.add.image(480, 70, "arrows");
     this.arrows.setOrigin(0, 0);
 
-<<<<<<< HEAD
         this.message = this.add.text(50,50, "Hello\nNinja!", { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
         
         this.start_btn = this.add.image(150,400, 'start_btn')
@@ -52,10 +51,8 @@ class Scene1 extends Phaser.Scene {
             yoyo: true,
             loop: -1
         })
-=======
     this.left_panel = this.add.rectangle(0, 0, 300, 500, 0x7ab980);
     this.left_panel.setOrigin(0, 0);
->>>>>>> f51b528 (adjusted responsiveness in game page)
 
     this.message = this.add.text(50, 50, "Hello\nNinja!", {
       fontFamily: '"Berlin Sans FB Demi", sans-serif',
@@ -241,7 +238,6 @@ class Scene2Level1 extends Phaser.Scene {
     if (this.cursorKeys.up.isDown) {
       this.ninja.y -= 3;
     }
-<<<<<<< HEAD
     preload ()
     {
         this.load.image('wallh_10', 'assets/game_images/walls/h10.png')
@@ -383,14 +379,12 @@ class Scene2Level1 extends Phaser.Scene {
     }
     if (Phaser.Geom.Intersects.RectangleToRectangle(this.ninja.getBounds(), this.trap.getBounds())) {
         this.ninja.setPosition(x_before_move -20 , y_before_move)
-=======
     if (this.cursorKeys.down.isDown) {
       this.ninja.y += 3;
     }
     if (this.cursorKeys.left.isDown) {
       this.ninja.x -= 3;
       this.ninja.flipX = true;
->>>>>>> f51b528 (adjusted responsiveness in game page)
     }
     if (this.cursorKeys.right.isDown) {
       this.ninja.x += 3;
