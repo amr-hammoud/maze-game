@@ -47,7 +47,7 @@ class Scene1 extends Phaser.Scene
         this.message = this.add.text(50,50, "Hello\nNinja!", { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
         
         this.start_btn = this.add.image(150,400, 'start_btn')
-        this.start_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelOne'))
+        this.start_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('level_y'))
         this.start_btn.scale = 1.5
         this.tweens.add({
             targets: this.start_btn,
@@ -559,7 +559,29 @@ class levely extends Phaser.Scene
 
     preload ()
     {
-        
+        this.load.image('bg_levely', 'assets/game_images/level_backgrouds/purple.png')
+        this.load.image('start_btn', 'assets/game_images/buttons/button-start.png')
+        this.load.image('arrows', 'assets/game_images/buttons/buttons.png')
+        this.load.spritesheet('ninja', 'assets/game_images/character/Run (32x32).png', {frameWidth: 32, frameHeight:32})
+        this.load.spritesheet('trap', 'assets/game_images/traps/trap(38x38).png', {frameWidth: 38, frameHeight:38})
+
+        this.load.image('wallh_10', 'assets/game_images/walls/h10.png')
+        this.load.image('wallh_8', 'assets/game_images/walls/h8.png')
+        this.load.image('wallh_5', 'assets/game_images/walls/h5.png')
+        this.load.image('wallh_3', 'assets/game_images/walls/h3.png')
+        this.load.image('wallh_2', 'assets/game_images/walls/h2.png')
+        this.load.image('wallv_6', 'assets/game_images/walls/v6.png')
+        this.load.image('wallv_1', 'assets/game_images/walls/v1.png')
+        this.load.image('wallv_2', 'assets/game_images/walls/v2.png')
+        this.load.image('wallv_3', 'assets/game_images/walls/v3.png')
+
+        this.load.image('big_wall', 'assets/game_images/walls/Terrain (16x16).png')
+        this.load.image('to_lvl_2', 'assets/game_images/level_ending/02.png')
+        this.load.spritesheet('apple', 'assets/game_images/food/Apple.png', {frameWidth: 32, frameHeight:32})
+        this.load.spritesheet('cherries', 'assets/game_images/food/Cherries.png', {frameWidth: 32, frameHeight:32})
+        this.load.image('reset_btn', 'assets/game_images/buttons/reset_button.png')
+
+
     }
       
     create ()
