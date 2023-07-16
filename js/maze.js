@@ -11,6 +11,7 @@ class Scene1 extends Phaser.Scene
     {   
         this.load.audio("back_ground_music", "assets/sounds/Japanese Battle Music - Ronin.mp3")
         this.load.audio("eating_sound", "assets/sounds/eating-sound-effect-36186.mp3")
+        this.load.audio("damage_sound", "assets/sounds/Minecraft Damage (Oof) - Sound Effect (HD).mp3")
         this.load.image('bg_lvl1', 'assets/game_images/level_backgrouds/Blue.png')
         this.load.image('bg_home', 'assets/game_images/level_backgrouds/Purple.png')
         this.load.image('bg_lvl2', 'assets/game_images/level_backgrouds/Green.png')
@@ -133,6 +134,7 @@ class Scene2Level1 extends Phaser.Scene
         this.background = this.add.tileSprite(300,0,600, 500, 'bg_lvl1' )
         this.background.setOrigin(0,0)
         this.eating_sound = this.sound.add("eating_sound")
+        this.damage_sound = this.sound.add("damage_sound")
         this.left_panel = this.add.rectangle(0,0,300,500,0x7ab980)
         this.left_panel.setOrigin(0,0)
 
@@ -266,6 +268,7 @@ class Scene2Level1 extends Phaser.Scene
         this.score -= 5
         global_score -= 5
         this.score_label.text = "Score: " + this.score
+        this.damage_sound.play()
     }
     }
 
@@ -290,6 +293,7 @@ class Scene3Level2 extends Phaser.Scene
         this.left_panel.setOrigin(0,0)
 
         this.eating_sound = this.sound.add("eating_sound")
+        this.damage_sound = this.sound.add("damage_sound")
 
         this.score = 0
         this.score_label = this.add.text(50,30, `Score: ${this.score}`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
@@ -446,6 +450,7 @@ class Scene3Level2 extends Phaser.Scene
             this.score -= 5
             global_score -= 5
             this.score_label.text = "Score: " + this.score
+            this.damage_sound.play()
                 }
             )
         
@@ -551,6 +556,7 @@ class Scene5level4 extends Phaser.Scene
         this.left_panel.setOrigin(0,0)
 
         this.eating_sound = this.sound.add("eating_sound")
+        this.damage_sound = this.sound.add("damage_sound")
 
         this.score = 0
         this.score_label = this.add.text(50,30, `Score: ${this.score}`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
@@ -677,6 +683,7 @@ class Scene5level4 extends Phaser.Scene
             this.score -= 5
             global_score -= 5
             this.score_label.text = "Score: " + this.score
+            this.damage_sound.play()
                 }
             )
     }
@@ -747,6 +754,7 @@ class Scene6Level5 extends Phaser.Scene {
 		this.left_panel.setOrigin(0, 0);
 
         this.eating_sound = this.sound.add("eating_sound")
+        this.damage_sound = this.sound.add("damage_sound")
 
 		this.score = 0;
 		this.score_label = this.add.text(50, 30, `Score: ${this.score}`, {
@@ -969,6 +977,7 @@ class Scene6Level5 extends Phaser.Scene {
 			this.score -= 0.5;
             global_score -= 0.5
 			this.score_label.text = "Score: " + this.score;
+            this.damage_sound.play()
 		});
         this.physics.add.collider(this.ninja, this.to_end, () => {
 			if (this.score >= 30) {
