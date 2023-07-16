@@ -629,34 +629,46 @@ class EndingScene extends Phaser.Scene {
 
     this.midground = this.add.image(0, 60, "Mountain");
     this.midground.setOrigin(0, 0);
-    this.midground.scale = 0.2
-    
-    this.foreground = this.add.image(400, 500,  "Ground");
-    this.foreground.scale=0.4
+    this.midground.scale = 0.2;
+
+    this.foreground = this.add.image(400, 500, "Ground");
+    this.foreground.scale = 0.4;
     this.add.text(1000, 100, "\t\tCONGRATULATIONS\nYou Escaped The Maze...", {
-        fontFamily: '"Berlin Sans FB Demi", sans-serif',
-        fontSize: "42px",
-      })
+      fontFamily: '"Berlin Sans FB Demi", sans-serif',
+      fontSize: "42px",
+    });
 
     this.add.text(1000, 400, "\t\t\t\t\tYou Scored: 1000", {
-    fontFamily: '"Berlin Sans FB Demi", sans-serif',
-    fontSize: "42px",
-    })
+      fontFamily: '"Berlin Sans FB Demi", sans-serif',
+      fontSize: "42px",
+    });
+    this.startAgain = this.add.text(1000, 400, "Tap Any Where To Start Again", {
+      fontFamily: '"Berlin Sans FB Demi", sans-serif',
+      fontSize: "30px",
+    });
+    this.startAgain.visible = false;
+    this.time.addEvent({
+      delay: 10000,
+      callback: this.showText,
+      callbackScope: this,
+    });
+  }
+  showText() {
+    this.startAgain.visible = true;
   }
 
   update() {
     this.cameras.main.scrollX += 2;
     this.midground.x = this.cameras.main.scrollX * 0.3;
     this.foreground.x = this.cameras.main.scrollX;
-
   }
 }
 const config = {
   type: Phaser.AUTO,
   width: 900,
   height: 500,
-  scene: [Scene1, Scene2Level1, Scene3Level2, Scene4Level3,  EndingScene],
-  backgroundColor: '#4488aa',
+  scene: [Scene1, Scene2Level1, Scene3Level2, Scene4Level3, EndingScene],
+  backgroundColor: "#4488aa",
   physics: {
     default: "arcade",
     arcade: {
