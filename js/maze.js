@@ -626,7 +626,7 @@ class EndingScene extends Phaser.Scene {
   create() {
     const width = this.scale.width;
     const height = this.scale.height;
-
+    this.input.on('pointerdown', () => this.scene.start('homePage'));
     this.midground = this.add.image(0, 60, "Mountain");
     this.midground.setOrigin(0, 0);
     this.midground.scale = 0.2;
@@ -642,25 +642,30 @@ class EndingScene extends Phaser.Scene {
       fontFamily: '"Berlin Sans FB Demi", sans-serif',
       fontSize: "42px",
     });
-    this.startAgain = this.add.text(1000, 400, "Tap Any Where To Start Again", {
+    this.startAgain = this.add.text(0, 200,"\t\t\t\t\t\t\t\tTap Any Where To Start Again", {
       fontFamily: '"Berlin Sans FB Demi", sans-serif',
       fontSize: "30px",
     });
+
     this.startAgain.visible = false;
     this.time.addEvent({
-      delay: 10000,
+      delay: 15000,
       callback: this.showText,
       callbackScope: this,
     });
   }
   showText() {
     this.startAgain.visible = true;
+    
   }
 
   update() {
+    
     this.cameras.main.scrollX += 2;
     this.midground.x = this.cameras.main.scrollX * 0.3;
     this.foreground.x = this.cameras.main.scrollX;
+    this.startAgain.x = this.cameras.main.scrollX - 2;
+    
   }
 }
 const config = {
@@ -668,7 +673,7 @@ const config = {
   width: 900,
   height: 500,
   scene: [Scene1, Scene2Level1, Scene3Level2, Scene4Level3, EndingScene],
-  backgroundColor: "#4488aa",
+  backgroundColor: "#23444d",
   physics: {
     default: "arcade",
     arcade: {
