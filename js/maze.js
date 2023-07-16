@@ -431,7 +431,7 @@ class Scene3Level3 extends Phaser.Scene
         this.trap_hint = this.physics.add.sprite(70,290,'trap')
         
         this.reset_btn = this.add.image(150,400, 'reset_btn')
-        this.reset_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelTwo'))
+        this.reset_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelThree'))
         this.reset_btn.scale = 0.3
         
     }
