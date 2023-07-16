@@ -47,7 +47,7 @@ class Scene1 extends Phaser.Scene
         this.message = this.add.text(50,50, "Hello\nNinja!", { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
         
         this.start_btn = this.add.image(150,400, 'start_btn')
-        this.start_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelFour'))
+        this.start_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelThree'))
         this.start_btn.scale = 1.5
         this.tweens.add({
             targets: this.start_btn,
@@ -555,7 +555,7 @@ const config = {
     type: Phaser.AUTO,
     width: 900,
     height: 500,
-    scene: [Scene1, Scene2Level1, Scene3Level2, Scene3Level3,Scene5Level4],
+    scene: [Scene1, Scene2Level1, Scene3Level2, Scene4Level3, Scene5Level4],
     physics: {
         default: "arcade",
         arcade: {
