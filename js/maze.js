@@ -8,7 +8,8 @@ class Scene1 extends Phaser.Scene
     }
 
     preload ()
-    {
+    {   
+        this.load.audio("back_ground_music", "assets/sounds/Japanese Battle Music - Ronin.mp3")
         this.load.image('bg_lvl1', 'assets/game_images/level_backgrouds/Blue.png')
         this.load.image('bg_home', 'assets/game_images/level_backgrouds/Purple.png')
         this.load.image('bg_lvl2', 'assets/game_images/level_backgrouds/Green.png')
@@ -43,6 +44,9 @@ class Scene1 extends Phaser.Scene
       
     create ()
     {
+        this.background_music = this.sound.add("back_ground_music", { loop: true, volume: 0.1})
+        this.background_music.play()
+
         this.background = this.add.tileSprite(300,0,600, 500, 'bg_home' )
         this.background.setOrigin(0,0)
         
