@@ -461,6 +461,17 @@ class Scene3Level3 extends Phaser.Scene
         this.h1 = this.physics.add.image(680,250,'h1')
         this.h1.scale = 1.35
         this.h1.flipY = true
+
+        this.ninja = this.add.sprite(350,420,'ninja')
+        this.ninja.scale = 2.3
+        this.anims.create({
+            key:'ninja_anim',
+            frames: this.anims.generateFrameNumbers('ninja'),
+            frameRate:20,
+            repeat: -1
+        })
+        this.ninja.play('ninja_anim')
+
       
 
        
