@@ -42,6 +42,10 @@ class Scene1 extends Phaser.Scene
         this.load.image('big_wall', 'assets/game_images/walls/Terrain (16x16).png')
         this.load.image('to_lvl_2', 'assets/game_images/level_ending/02.png')
         this.load.spritesheet('apple', 'assets/game_images/food/Apple.png', {frameWidth: 32, frameHeight:32})
+
+        this.load.image("Ground", "assets/Ending-scene-elements/ground.png");
+        this.load.image("Sky", "assets/Ending-scene-elements/sky.svg");
+        this.load.image("Mountain", "assets/Ending-scene-elements/mountain.png");
     }
       
     create ()
@@ -165,9 +169,6 @@ class Scene2Level1 extends Phaser.Scene
         this.big_wall3.scale = 1.3
         this.big_wall3.angle = 90
         
-
-
-
         this.walls_grp = this.physics.add.group()
         this.walls_grp.add(this.physics.add.image(625,450,'wallh_10'))
         this.walls_grp.add(this.physics.add.image(625,50,'wallh_10'))
@@ -212,8 +213,6 @@ class Scene2Level1 extends Phaser.Scene
 
         this.to_lvl_2 = this.physics.add.sprite(750,100,'to_lvl_2')
         this.to_lvl_2.scale = 2
-
-        
 
         this.physics.add.collider(this.ninja,this.fruits_grp, (ninja, fruit) => {
             fruit.destroy()
@@ -282,7 +281,6 @@ class Scene3Level2 extends Phaser.Scene
     }
     preload ()
     {
-       
 
     }
     create(){
@@ -312,8 +310,6 @@ class Scene3Level2 extends Phaser.Scene
         this.reset_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelTwo'))
         this.reset_btn.scale = 0.3
 
-////////////////////////////
-
         this.big_wall1 = this.physics.add.image(343,250,'big_wall_silver')
         this.big_wall1.scale = 1.35
         this.big_wall1.flipY = true
@@ -323,8 +319,6 @@ class Scene3Level2 extends Phaser.Scene
         this.big_wall3.scale = 1.5
         this.big_wall3.angle = 90
         this.cursorKeys = this.input.keyboard.createCursorKeys()
-
-
 
         this.walls_grp = this.physics.add.group()
         this.walls_grp.add(this.physics.add.image(625,450,'wallh_10'))
@@ -382,7 +376,6 @@ class Scene3Level2 extends Phaser.Scene
         this.trap12 = this.physics.add.sprite(820,325,'trap')
         this.trap13 = this.physics.add.sprite(820,150,'trap')
 
-
         this.traps_grp.add(this.trap1)
         this.traps_grp.add(this.trap2)
         this.traps_grp.add(this.trap3)
@@ -397,7 +390,6 @@ class Scene3Level2 extends Phaser.Scene
         this.traps_grp.add(this.trap12)
         this.traps_grp.add(this.trap12)
         this.traps_grp.add(this.trap13)
-
 
         this.trap1.play('trap_anim')
         this.trap2.play('trap_anim')
@@ -443,7 +435,7 @@ class Scene3Level2 extends Phaser.Scene
         })
         this.physics.add.collider(this.ninja,this.to_lvl_3, () => {
             if(this.score >= this.min_score)
-                this.scene.start('gameLevelFour')
+                this.scene.start('gameLevelThree')
         })
         this.physics.add.collider(this.ninja,this.traps_grp, () => {
             this.ninja.setPosition(this.ninja.x - 10, this.ninja.y - 10)
@@ -453,12 +445,9 @@ class Scene3Level2 extends Phaser.Scene
             this.damage_sound.play()
                 }
             )
-        
     }
     update(){
         this.moving_ninja()
-
-        
     }
     moving_ninja(){
 
@@ -490,8 +479,6 @@ class Scene3Level2 extends Phaser.Scene
         }
 
     }
-    
-
 }
 
 class Scene4Level3 extends Phaser.Scene
@@ -502,8 +489,14 @@ class Scene4Level3 extends Phaser.Scene
     }
     preload ()
     {
-        this.load.image('reset_btn', 'assets/game_images/buttons/reset_button.png')
-        this.load.image('big_wall_silver', 'assets/game_images/walls/TerrainSilver(16x16).png')
+        this.load.image('h1', 'assets/game_images/walls/h1.png')
+        this.load.image('v5', 'assets/game_images/walls/v5.png')
+        this.load.image('h7', 'assets/game_images/walls/h7.png')
+        this.load.image('v7', 'assets/game_images/walls/v7.png')
+        this.load.image('h3', 'assets/game_images/walls/h3.png')
+        this.load.image('h10', 'assets/game_images/walls/h10.png')
+        this.load.image('to_lvl_4', 'assets/game_images/level_ending/04.png')
+        this.load.image('terain', 'assets/game_images/walls/Terrain (16x16).png')
     }
     create(){
         this.background = this.add.tileSprite(300,0,600, 500, 'bg_lvl3' )
@@ -512,7 +505,7 @@ class Scene4Level3 extends Phaser.Scene
         this.left_panel = this.add.rectangle(0,0,300,500,0x7ab980)
         this.left_panel.setOrigin(0,0)
         this.score = 0
-        this.score_label = this.add.text(50,30, `Score: ${this.score}`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
+        this.score_label = this.add.text(20,30, `Just escape!`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
 
         this.alert = this.add.text(50,100, `CAREFUL!\n Hidden traps \n are around ;D\n\n`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
         this.hint = this.add.text(100,220, `: +10pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
@@ -523,9 +516,101 @@ class Scene4Level3 extends Phaser.Scene
         this.reset_btn = this.add.image(150,400, 'reset_btn')
         this.reset_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelThree'))
         this.reset_btn.scale = 0.3
+
+        
+        this.walls_grp = this.physics.add.group()
+        this.walls_grp.add(this.physics.add.image(375,205,'v7'))
+        this.walls_grp.add(this.physics.add.image(680,250,'h1'))
+        this.walls_grp.add(this.physics.add.image(550,350,'h1'))
+        this.walls_grp.add(this.physics.add.image(620,30,'h10'))
+        this.walls_grp.add(this.physics.add.image(500,490,'h7'))
+        this.walls_grp.add(this.physics.add.image(335,350,'terain'))
+        this.walls_grp.add(this.physics.add.image(600,490,'h10'))
+        this.walls_grp.add(this.physics.add.image(500,490,'h3'))
+        this.walls_grp.add(this.physics.add.image(870,200,'v7'))
+
+
+        this.traps_grp = this.physics.add.group()
+        this.hidden1=this.physics.add.sprite(520,450,'trap')
+        this.hidden1.visible=false
+        this.traps_grp.add(this.hidden1)
+        this.hidden2=this.physics.add.sprite(520,400,'trap')
+        this.hidden2.visible=false
+        this.traps_grp.add(this.hidden2)
+        this.traps_grp.add(this.physics.add.sprite(600,450,'trap'))
+        this.traps_grp.add(this.physics.add.sprite(640,400,'trap'))
+        this.traps_grp.add(this.physics.add.sprite(520,230,'trap'))
+        this.traps_grp.add(this.physics.add.sprite(520,150,'trap'))
+        this.traps_grp.add(this.physics.add.sprite(520,100,'trap'))
+        this.traps_grp.add(this.physics.add.sprite(520,50,'trap'))
+        this.hidden3=this.physics.add.sprite(850,320,'trap')
+        this.hidden3.visible=false
+        this.traps_grp.add(this.hidden3)
+        this.traps_grp.add(this.physics.add.sprite(800,310,'trap'))
+        this.traps_grp.add(this.physics.add.sprite(720,450,'trap'))
+        this.traps_grp.add(this.physics.add.sprite(720,120,'trap'))
+
+
+        this.to_lvl_4=this.physics.add.image(880,420,"to_lvl_4")
+        this.to_lvl_4.scale = 2
+        
+        this.ninja = this.physics.add.sprite(350,420,'ninja')
+        this.ninja.scale = 2.3
+        this.anims.create({
+            key:'ninja_anim',
+            frames: this.anims.generateFrameNumbers('ninja'),
+            frameRate:20,
+            repeat: -1
+        })
+        this.ninja.play('ninja_anim')
+        this.cursorKeys = this.input.keyboard.createCursorKeys()
+
+
+        this.physics.add.collider(this.ninja, this.traps_grp, () => {
+            this.ninja.setPosition(this.ninja.x =350, this.ninja.y =420)
+		});
+
+        this.physics.add.collider(this.ninja,this.to_lvl_4, () => {
+                this.scene.start('gameLevelFour')
+        })
     }
+
+    
     update(){
+        this.moving_ninja()
+
     }
+    moving_ninja(){
+
+        const x_before_move = this.ninja.x
+        const y_before_move = this.ninja.y
+
+        if(this.cursorKeys.up.isDown){
+            this.ninja.y -= 3
+        }
+        if(this.cursorKeys.down.isDown){
+            this.ninja.y += 3
+        }
+        if(this.cursorKeys.left.isDown){
+            this.ninja.x -= 3
+            this.ninja.flipX = true
+        }
+        if(this.cursorKeys.right.isDown){
+            this.ninja.x += 3
+            this.ninja.flipX = false
+        }
+        let walls = this.walls_grp.getChildren()
+        for (let i = 0; i < walls.length; i++) {
+            let wall = walls[i]
+
+            if (Phaser.Geom.Intersects.RectangleToRectangle(this.ninja.getBounds(), wall.getBounds())) {
+                this.ninja.setPosition(x_before_move, y_before_move)
+            }
+            
+        }
+    }
+
+    
     
 
 }
@@ -539,11 +624,8 @@ class Scene5level4 extends Phaser.Scene
     preload ()
     {
         this.load.image('bg_level3', 'assets/game_images/level_backgrouds/Pink.png')
-        this.load.image('wallh_10', 'assets/game_images/walls/h10.png')
-        this.load.image('wallh_2', 'assets/game_images/walls/h2.png')
-        this.load.image('wallv_6', 'assets/game_images/walls/v6.png')
         this.load.image('wallv_7', 'assets/game_images/walls/v7.png')
-        this.load.image('to_lvl_4', 'assets/game_images/level_ending/04.png')
+        this.load.image('to_lvl_5', 'assets/game_images/level_ending/05.png')
         this.load.spritesheet('cherries', 'assets/game_images/food/Cherries.png', {frameWidth: 32, frameHeight:32})
     }
       
@@ -663,8 +745,8 @@ class Scene5level4 extends Phaser.Scene
         this.ninja.play('ninja_anim')
         this.physics.world.setBounds(300, 0, 900, 500);
 
-        this.to_lvl_4 = this.physics.add.sprite(850,100,'to_lvl_4')
-        this.to_lvl_4.scale = 2
+        this.to_lvl_5 = this.physics.add.sprite(850,100,'to_lvl_5')
+        this.to_lvl_5.scale = 2
 
         this.physics.add.collider(this.ninja,this.fruits_grp, (ninja, fruit) => {
             fruit.destroy()
@@ -674,7 +756,7 @@ class Scene5level4 extends Phaser.Scene
             this.eating_sound.play()
         })
 
-        this.physics.add.collider(this.ninja,this.to_lvl_4, () => {
+        this.physics.add.collider(this.ninja,this.to_lvl_5, () => {
             if(this.score >= 40)
                 this.scene.start('gameLevelFive')
         })
@@ -739,10 +821,6 @@ class Scene6Level5 extends Phaser.Scene {
 		this.load.image(
 			"bg_lvl4",
 			"assets/game_images/level_backgrouds/Brown.png"
-		);
-		this.load.image(
-			"big_wall_silver",
-			"assets/game_images/walls/TerrainSilver(16x16).png"
 		);
 		this.load.image("to_lvl_5", "assets/game_images/level_ending/05.png");
 	}
@@ -911,8 +989,6 @@ class Scene6Level5 extends Phaser.Scene {
 			loop: -1,
 		});
 
-		
-
 		this.fruits_grp = this.physics.add.group();
 		this.strawberry_1 = this.physics.add.sprite(510, 150, "strawberry");
 		this.strawberry_2 = this.physics.add.sprite(510, 350, "strawberry");
@@ -1029,9 +1105,7 @@ class EndingScene extends Phaser.Scene {
     }
   
     preload() {
-      this.load.image("Ground", "assets/Ending-scene-elements/ground.png");
-      this.load.image("Sky", "assets/Ending-scene-elements/sky.svg");
-      this.load.image("Mountain", "assets/Ending-scene-elements/mountain.png");
+      
     }
   
     create() {
