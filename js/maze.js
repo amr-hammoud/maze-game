@@ -29,6 +29,7 @@ class Scene1 extends Phaser.Scene
         this.load.image('big_wall', 'assets/game_images/walls/Terrain (16x16).png')
         this.load.image('to_lvl_2', 'assets/game_images/level_ending/02.png')
         this.load.spritesheet('apple', 'assets/game_images/food/Apple.png', {frameWidth: 32, frameHeight:32})
+        this.load.image('reset_btn', 'assets/game_images/buttons/reset_button.png')
     }
       
     create ()
@@ -47,7 +48,7 @@ class Scene1 extends Phaser.Scene
         this.message = this.add.text(50,50, "Hello\nNinja!", { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
         
         this.start_btn = this.add.image(150,400, 'start_btn')
-        this.start_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelThree'))
+        this.start_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelFour'))
         this.start_btn.scale = 1.5
         this.tweens.add({
             targets: this.start_btn,
@@ -518,11 +519,11 @@ class Scene5Level4 extends Phaser.Scene
     }
     preload ()
     {
-        this.load.image('reset_btn', 'assets/game_images/buttons/reset_button.png')
-        this.load.image('big_wall_silver', 'assets/game_images/walls/Pink.png')
+        this.load.spritesheet('strawberry', 'assets/game_images/food/Strawberry.png', {frameWidth: 32, frameHeight:32})
+        this.load.image('bg_lvl4', 'assets/game_images/level_backgrouds/Brown.png')
     }
     create(){
-        this.background = this.add.tileSprite(300,0,600, 500, 'bg_lvl3' )
+        this.background = this.add.tileSprite(300,0,600, 500, 'bg_lvl4' )
         this.background.setOrigin(0,0)
 
         this.left_panel = this.add.rectangle(0,0,300,500,0x7ab980)
@@ -532,16 +533,38 @@ class Scene5Level4 extends Phaser.Scene
 
         this.alert = this.add.text(50,100, `Time\nManagement`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
         this.hint = this.add.text(100,220, `: +10pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
-        this.apple_hint = this.physics.add.sprite(70,240,'apple')
-        this.apple_hint.scale = 3
+        this.strawberry_hint = this.physics.add.sprite(70,240,'strawberry')
+        this.strawberry_hint.scale = 3
         this.hint2 = this.add.text(100,270, `: -5pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
         this.trap_hint = this.physics.add.sprite(70,290,'trap')
         this.reset_btn = this.add.image(150,400, 'reset_btn')
-        this.reset_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelThree'))
+        this.reset_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelFour'))
         this.reset_btn.scale = 0.3
 
+        this.anims.create({
+            key:'strawberry_anim',
+            frames: this.anims.generateFrameNumbers('strawberry'),
+            frameRate:20,
+            repeat: -1
+        })
 
-      
+        this.strawberry_hint.play('strawberry_anim')
+
+        this.trap_hint.play('trap_anim')
+
+        this.ninja = this.physics.add.sprite(325,450,'ninja')
+        this.ninja.setCollideWorldBounds(true)
+        this.ninja.scale = 1.4
+
+        this.ninja.play('ninja_anim')
+        this.physics.world.setBounds(300, 0, 900, 500);    
+
+        this.physics.add.collider(this.ninja,this.fruits_grp, (ninja, fruit) => {
+            fruit.destroy()
+            this.score +=10
+            this.score_label.text = "Score: " + this.score
+        })
+
         
     }
     update(){
