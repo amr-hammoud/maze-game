@@ -564,6 +564,38 @@ class Scene5Level4 extends Phaser.Scene
         this.walls_grp.add(this.big_wall1)
         this.walls_grp.add(this.big_wall2)
 
+        this.traps_grp = this.physics.add.group()
+        this.trap1 = this.physics.add.sprite(400,150,'trap')
+        this.trap2 = this.physics.add.sprite(530,200,'trap')
+
+        this.traps_grp.add(this.trap1)
+        this.traps_grp.add(this.trap2)
+
+        this.trap1.play('trap_anim')
+        this.trap2.play('trap_anim')
+
+
+        this.tweens.add({
+            targets: this.trap1,
+            x: 550,
+            y: 50,
+            duration: 600,
+            ease: "Power2",
+            yoyo: true,
+            loop: -1
+        });
+
+        this.tweens.add({
+            targets: this.trap2,
+            x: 400,
+            y: 200,
+            duration: 500,
+            ease: "Power2",
+            yoyo: true,
+            loop: -1
+        });
+
+
         this.anims.create({
             key:'strawberry_anim',
             frames: this.anims.generateFrameNumbers('strawberry'),
