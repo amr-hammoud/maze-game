@@ -421,6 +421,16 @@ class Scene3Level3 extends Phaser.Scene
 
         this.left_panel = this.add.rectangle(0,0,300,500,0x7ab980)
         this.left_panel.setOrigin(0,0)
+        this.score = 0
+        this.score_label = this.add.text(50,30, `Score: ${this.score}`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
+
+        this.alert = this.add.text(50,100, `CAREFUL!\n Hidden traps \n are around ;D\n\n`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
+        this.hint = this.add.text(100,220, `: +10pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
+        this.apple_hint = this.physics.add.sprite(70,240,'apple')
+        this.apple_hint.scale = 3
+        this.hint2 = this.add.text(100,270, `: -5pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
+        this.trap_hint = this.physics.add.sprite(70,290,'trap')
+
 
       
         
