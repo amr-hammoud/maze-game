@@ -93,3 +93,22 @@ canvas {
   border-radius: 10px;
   box-shadow: 5px 5px 7px #0000007b;
 }
+
+@media (max-width: 1024px) {
+  .content h2 {
+    font-size: 4em;
+    margin-top: 50px;
+  }
+  canvas {
+    width: 70%;
+  }
+}
+@media (max-width: 768px) {
+  .content h2 {
+    font-size: 3em;
+    margin-top: 50px;
+  }
+  .canva {
+    width: 90%;
+  }
+}
