@@ -602,6 +602,11 @@ class levely extends Phaser.Scene
         this.apple_hint = this.physics.add.sprite(70,240,'cherries')
         this.apple_hint.scale = 3
 
+        this.hint2 = this.add.text(100,270, `: -5pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
+        this.trap_hint = this.physics.add.sprite(70,290,'trap')
+        
+
+
     }
     update(){
 
