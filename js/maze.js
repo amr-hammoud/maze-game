@@ -70,7 +70,7 @@ class Scene1 extends Phaser.Scene {
     this.start_btn = this.add.image(150, 400, "start_btn");
     this.start_btn
       .setInteractive({ useHandCursor: true })
-      .on("pointerdown", () => this.scene.start("gameLevelThree"));
+      .on("pointerdown", () => this.scene.start("gameEnding"));
     this.start_btn.scale = 1.5;
     this.tweens.add({
       targets: this.start_btn,
@@ -627,29 +627,36 @@ class EndingScene extends Phaser.Scene {
     const width = this.scale.width;
     const height = this.scale.height;
 
-    this.background = this.add.tileSprite(0, 0, width, height, "Sky");
-    this.background.setOrigin(0, 0);
+    this.midground = this.add.image(0, 60, "Mountain");
+    this.midground.setOrigin(0, 0);
+    this.midground.scale = 0.2
+    
+    this.foreground = this.add.image(400, 500,  "Ground");
+    this.foreground.scale=0.4
+    this.add.text(1000, 100, "\t\tCONGRATULATIONS\nYou Escaped The Maze...", {
+        fontFamily: '"Berlin Sans FB Demi", sans-serif',
+        fontSize: "42px",
+      })
 
-    this.midground = this.add.tileSprite(0, 0, width, height, "Mountain");
-    this.midground.setOrigin(0, 1);
-
-    this.foreground = this.add.tileSprite(0, 0, width, height, "Ground");
-    this.foreground.setOrigin(0, 1);
+    this.add.text(1000, 400, "\t\t\t\t\tYou Scored: 1000", {
+    fontFamily: '"Berlin Sans FB Demi", sans-serif',
+    fontSize: "42px",
+    })
   }
 
   update() {
     this.cameras.main.scrollX += 2;
+    this.midground.x = this.cameras.main.scrollX * 0.3;
+    this.foreground.x = this.cameras.main.scrollX;
 
-    this.background.tilePositionX = this.cameras.main.scrollX * 0.1;
-    this.midground.tilePositionX = this.cameras.main.scrollX * 0.5;
-    this.foreground.tilePositionX = this.cameras.main.scrollX;
   }
 }
 const config = {
   type: Phaser.AUTO,
   width: 900,
   height: 500,
-  scene: [Scene1, Scene2Level1, Scene3Level2, Scene4Level3, Scene5Level4],
+  scene: [Scene1, Scene2Level1, Scene3Level2, Scene4Level3,  EndingScene],
+  backgroundColor: '#4488aa',
   physics: {
     default: "arcade",
     arcade: {
