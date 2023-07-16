@@ -359,6 +359,7 @@ class Scene3Level2 extends Phaser.Scene
         this.trap10 = this.physics.add.sprite(720,325,'trap')
         this.trap11 = this.physics.add.sprite(770,325,'trap')
         this.trap12 = this.physics.add.sprite(820,325,'trap')
+        this.trap13 = this.physics.add.sprite(820,150,'trap')
 
 
         this.traps_grp.add(this.trap1)
@@ -374,6 +375,7 @@ class Scene3Level2 extends Phaser.Scene
         this.traps_grp.add(this.trap11)
         this.traps_grp.add(this.trap12)
         this.traps_grp.add(this.trap12)
+        this.traps_grp.add(this.trap13)
 
 
         this.trap1.play('trap_anim')
@@ -388,6 +390,7 @@ class Scene3Level2 extends Phaser.Scene
         this.trap10.play('trap_anim')
         this.trap11.play('trap_anim')
         this.trap12.play('trap_anim')
+        this.trap13.play('trap_anim')
 
         this.ninja = this.physics.add.sprite(325,100,'ninja')
         this.character_grp = this.physics.add.group()
