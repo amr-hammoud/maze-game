@@ -47,7 +47,7 @@ class Scene1 extends Phaser.Scene
         this.message = this.add.text(50,50, "Hello\nNinja!", { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
         
         this.start_btn = this.add.image(150,400, 'start_btn')
-        this.start_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelThree'))
+        this.start_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelFour'))
         this.start_btn.scale = 1.5
         this.tweens.add({
             targets: this.start_btn,
@@ -264,7 +264,7 @@ class Scene3Level2 extends Phaser.Scene
         this.load.image('to_lvl_3', 'assets/game_images/level_ending/03.png')
         this.load.image('big_wall_silver', 'assets/game_images/walls/TerrainSilver(16x16).png')
         this.load.spritesheet('banana', 'assets/game_images/food/Bananas.png', {frameWidth: 32, frameHeight:32})
-
+        this.load.image('reset_btn', 'assets/game_images/buttons/reset_button.png')
 
     }
     create(){
@@ -469,11 +469,7 @@ class Scene3Level3 extends Phaser.Scene
     preload ()
     {
 
-        this.load.image('h1', 'assets/game_images/walls/h1.png')
-        this.load.image('v5', 'assets/game_images/walls/v5.png')
-        this.load.image('h7', 'assets/game_images/walls/h7.png')
-        this.load.spritesheet('ninja', 'assets/game_images/character/Run (32x32).png', {frameWidth: 32, frameHeight:32})
-        this.load.spritesheet('trap', 'assets/game_images/traps/trap(38x38).png', {frameWidth: 38, frameHeight:38})
+        this.load.image('big_wall_silver', 'assets/game_images/walls/TerrainSilver(16x16).png')
     }
     create(){
         this.background = this.add.tileSprite(300,0,600, 500, 'bg_lvl3' )
@@ -494,45 +490,6 @@ class Scene3Level3 extends Phaser.Scene
         this.reset_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelThree'))
         this.reset_btn.scale = 0.3
 
-        this.h1 = this.physics.add.image(343,380,'h1')
-        this.h1.scale = 1.35
-        this.h1.flipY = true
-      
-        this.v5 = this.physics.add.image(380,210,'v5')
-        this.v5.scale = 1.35
-        this.v5.flipY = false
-
-        this.h7 = this.physics.add.image(596,38,'h7')
-        this.h7.scale = 1.35
-        this.h7.flipY = 
-        
-        this.h7 = this.physics.add.image(540,470,'h7')
-        this.h7.scale = 1.35
-        this.h7.flipY = true
-
-        this.h1 = this.physics.add.image(550,350,'h1')
-        this.h1.scale = 1.35
-        this.h1.flipY = true
-
-        this.h1 = this.physics.add.image(680,250,'h1')
-        this.h1.scale = 1.35
-        this.h1.flipY = true
-
-        this.ninja = this.add.sprite(350,420,'ninja')
-        this.ninja.scale = 2.3
-        this.anims.create({
-            key:'ninja_anim',
-            frames: this.anims.generateFrameNumbers('ninja'),
-            frameRate:20,
-            repeat: -1
-        })
-        this.ninja.play('ninja_anim')
-
-      
-
-       
-
-
 
       
         
@@ -548,7 +505,7 @@ const config = {
     type: Phaser.AUTO,
     width: 900,
     height: 500,
-    scene: [Scene1, Scene2Level1, Scene3Level2, Scene3Level3],
+    scene: [Scene1, Scene2Level1, Scene3Level2, Scene3Level3,Scene5Level4],
     physics: {
         default: "arcade",
         arcade: {
