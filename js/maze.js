@@ -47,7 +47,7 @@ class Scene1 extends Phaser.Scene
         this.message = this.add.text(50,50, "Hello\nNinja!", { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
         
         this.start_btn = this.add.image(150,400, 'start_btn')
-        this.start_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelThree'))
+        this.start_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelFour'))
         this.start_btn.scale = 1.5
         this.tweens.add({
             targets: this.start_btn,
@@ -264,7 +264,7 @@ class Scene3Level2 extends Phaser.Scene
         this.load.image('to_lvl_3', 'assets/game_images/level_ending/03.png')
         this.load.image('big_wall_silver', 'assets/game_images/walls/TerrainSilver(16x16).png')
         this.load.spritesheet('banana', 'assets/game_images/food/Bananas.png', {frameWidth: 32, frameHeight:32})
-
+        this.load.image('reset_btn', 'assets/game_images/buttons/reset_button.png')
 
     }
     create(){
@@ -468,7 +468,7 @@ class Scene3Level3 extends Phaser.Scene
     }
     preload ()
     {
-
+        this.load.image('reset_btn', 'assets/game_images/buttons/reset_button.png')
         this.load.image('big_wall_silver', 'assets/game_images/walls/TerrainSilver(16x16).png')
     }
     create(){
@@ -500,12 +500,52 @@ class Scene3Level3 extends Phaser.Scene
 
 }
 
+class Scene5Level4 extends Phaser.Scene
+{
+    constructor ()
+    {
+        super('gameLevelFour');
+    }
+    preload ()
+    {
+        this.load.image('reset_btn', 'assets/game_images/buttons/reset_button.png')
+        this.load.image('big_wall_silver', 'assets/game_images/walls/Pink.png')
+    }
+    create(){
+        this.background = this.add.tileSprite(300,0,600, 500, 'bg_lvl3' )
+        this.background.setOrigin(0,0)
+
+        this.left_panel = this.add.rectangle(0,0,300,500,0x7ab980)
+        this.left_panel.setOrigin(0,0)
+        this.score = 0
+        this.score_label = this.add.text(50,30, `Score: ${this.score}`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
+
+        this.alert = this.add.text(50,100, `Time\nManagement`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
+        this.hint = this.add.text(100,220, `: +10pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
+        this.apple_hint = this.physics.add.sprite(70,240,'apple')
+        this.apple_hint.scale = 3
+        this.hint2 = this.add.text(100,270, `: -5pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
+        this.trap_hint = this.physics.add.sprite(70,290,'trap')
+        this.reset_btn = this.add.image(150,400, 'reset_btn')
+        this.reset_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelThree'))
+        this.reset_btn.scale = 0.3
+
+
+      
+        
+    }
+    update(){
+    }
+    
+
+}
+
 
 const config = {
     type: Phaser.AUTO,
     width: 900,
     height: 500,
-    scene: [Scene1, Scene2Level1, Scene3Level2, Scene3Level3],
+    scene: [Scene1, Scene2Level1, Scene3Level2, Scene3Level3,Scene5Level4],
     physics: {
         default: "arcade",
         arcade: {
