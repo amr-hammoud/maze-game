@@ -245,12 +245,12 @@ class Scene2Level1 extends Phaser.Scene
             if (Phaser.Geom.Intersects.RectangleToRectangle(this.ninja.getBounds(), wall.getBounds())) {
                 this.ninja.setPosition(x_before_move, y_before_move)
             }
-    }
-    if (Phaser.Geom.Intersects.RectangleToRectangle(this.ninja.getBounds(), this.trap.getBounds())) {
-        this.ninja.setPosition(x_before_move -20 , y_before_move)
-        this.score -= 5
-        this.score_label.text = "Score: " + this.score
-    }
+        }
+        if (Phaser.Geom.Intersects.RectangleToRectangle(this.ninja.getBounds(), this.trap.getBounds())) {
+            this.ninja.setPosition(x_before_move -20 , y_before_move)
+            this.score -= 5
+            this.score_label.text = "Score: " + this.score
+        }
     }
 
 }
@@ -566,7 +566,7 @@ class Scene5Level4 extends Phaser.Scene
 
         this.traps_grp = this.physics.add.group()
         this.trap1 = this.physics.add.sprite(400,150,'trap')
-        this.trap2 = this.physics.add.sprite(530,200,'trap')
+        this.trap2 = this.physics.add.sprite(530,230,'trap')
 
         this.traps_grp.add(this.trap1)
         this.traps_grp.add(this.trap2)
@@ -588,7 +588,7 @@ class Scene5Level4 extends Phaser.Scene
         this.tweens.add({
             targets: this.trap2,
             x: 400,
-            y: 200,
+            y: 230,
             duration: 500,
             ease: "Power2",
             yoyo: true,
@@ -622,6 +622,12 @@ class Scene5Level4 extends Phaser.Scene
             this.score +=10
             this.score_label.text = "Score: " + this.score
         })
+
+        this.physics.add.collider(this.ninja,this.traps_grp, () => {
+            this.score -= 5
+            this.score_label.text = "Score: " + this.score
+                }
+        )
 
         
     }
