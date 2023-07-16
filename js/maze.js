@@ -30,7 +30,6 @@ class Scene1 extends Phaser.Scene
         this.left_panel.setOrigin(0,0)
 
         this.message = this.add.text(50,50, "Hello\nNinja!", { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
-        // this.message = this.add.text(50,170, "Please Enter\nYour Name", { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '26px'})
         
         this.start_btn = this.add.image(150,400, 'start_btn')
         this.start_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelOne'))
@@ -112,6 +111,7 @@ class Scene2Level1 extends Phaser.Scene
         this.load.image('wallv_3', 'assets/game_images/walls/v3.png')
         this.load.image('big_wall', 'assets/game_images/walls/Terrain (16x16).png')
         this.load.image('to_lvl_2', 'assets/game_images/level_ending/02.png')
+        this.load.image('reset_btn', 'assets/game_images/buttons/reset_button.png')
         this.load.spritesheet('apple', 'assets/game_images/food/Apple.png', {frameWidth: 32, frameHeight:32})
 
     }
@@ -123,15 +123,21 @@ class Scene2Level1 extends Phaser.Scene
         this.left_panel.setOrigin(0,0)
 
         this.score = 0;
-        this.score_label = this.add.text(50,50, `Score: ${this.score}`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
+        this.score_label = this.add.text(50,30, `Score: ${this.score}`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
 
         this.min_score = 20
-        this.alert = this.add.text(50,130, `Score at least\n${this.min_score}pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
+        this.alert = this.add.text(50,100, `Score at least\n${this.min_score}pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
 
-        this.hint = this.add.text(50,290, `Each Apple\n\n\nis 10pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
-        this.apple_hint = this.physics.add.sprite(80,365,'apple')
+        this.hint = this.add.text(100,220, `: +10pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
+        this.apple_hint = this.physics.add.sprite(70,240,'apple')
         this.apple_hint.scale = 3
         
+        this.hint2 = this.add.text(100,270, `: -5pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
+        this.trap_hint = this.physics.add.sprite(70,290,'trap')
+        
+        this.reset_btn = this.add.image(150,400, 'reset_btn')
+        this.reset_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelOne'))
+        this.reset_btn.scale = 0.3
 
         this.cursorKeys = this.input.keyboard.createCursorKeys()
 
@@ -172,6 +178,7 @@ class Scene2Level1 extends Phaser.Scene
 
         this.trap = this.physics.add.sprite(605,310,'trap')
         this.trap.play('trap_anim')
+        this.trap_hint.play('trap_anim')
 
         this.ninja = this.physics.add.sprite(325,450,'ninja')
         this.character_grp = this.physics.add.group()
@@ -184,6 +191,11 @@ class Scene2Level1 extends Phaser.Scene
 
         this.to_lvl_2 = this.physics.add.sprite(780,100,'to_lvl_2')
         this.to_lvl_2.scale = 2
+
+        this.physics.add.collider(this.ninja,this.trap, (ninja, trap) => {
+            this.score -=10
+            this.score_label.text = "Score: " + this.score
+        })
 
         this.physics.add.collider(this.ninja,this.fruits_grp, (ninja, fruit) => {
             fruit.destroy()
