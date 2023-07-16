@@ -521,6 +521,8 @@ class Scene5Level4 extends Phaser.Scene
     {
         this.load.spritesheet('strawberry', 'assets/game_images/food/Strawberry.png', {frameWidth: 32, frameHeight:32})
         this.load.image('bg_lvl4', 'assets/game_images/level_backgrouds/Brown.png')
+        this.load.image('big_wall_silver', 'assets/game_images/walls/TerrainSilver(16x16).png')
+
     }
     create(){
         this.background = this.add.tileSprite(300,0,600, 500, 'bg_lvl4' )
@@ -543,6 +545,22 @@ class Scene5Level4 extends Phaser.Scene
 
         this.cursorKeys = this.input.keyboard.createCursorKeys()
 
+        this.big_wall1 = this.physics.add.image(343,250,'big_wall_silver')
+        this.big_wall1.scale = 1.35
+        this.big_wall1.flipY = true
+        this.big_wall3 = this.physics.add.image(850,105,'big_wall_silver')
+        this.big_wall3.scale = 1.5
+        this.big_wall3.angle = 90
+
+        this.walls_grp = this.physics.add.group()
+        this.walls_grp.add(this.physics.add.image(625,450,'wallh_10'))
+        this.walls_grp.add(this.physics.add.image(625,50,'wallh_10'))
+        this.walls_grp.add(this.physics.add.image(855,298,'wallv_6'))
+        this.walls_grp.add(this.physics.add.image(394,302,'wallv_6'))
+        this.walls_grp.add(this.big_wall1)
+        this.walls_grp.add(this.big_wall3)
+
+
         this.anims.create({
             key:'strawberry_anim',
             frames: this.anims.generateFrameNumbers('strawberry'),
@@ -554,7 +572,7 @@ class Scene5Level4 extends Phaser.Scene
 
         this.trap_hint.play('trap_anim')
 
-        this.ninja = this.physics.add.sprite(325,450,'ninja')
+        this.ninja = this.physics.add.sprite(350,100,'ninja')
         this.ninja.setCollideWorldBounds(true)
         this.ninja.scale = 1.4
 
