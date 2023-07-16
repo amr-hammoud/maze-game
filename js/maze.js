@@ -108,7 +108,7 @@ class Scene2Level1 extends Phaser.Scene
         this.left_panel = this.add.rectangle(0,0,300,500,0x7ab980)
         this.left_panel.setOrigin(0,0)
 
-        this.score = 0;
+        this.score = 0
         this.score_label = this.add.text(50,30, `Score: ${this.score}`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
 
         this.min_score = 20
