@@ -413,7 +413,11 @@ class Scene3Level3 extends Phaser.Scene
     preload ()
     {
 
-        this.load.image('big_wall_silver', 'assets/game_images/walls/TerrainSilver(16x16).png')
+        this.load.image('h1', 'assets/game_images/walls/h1.png')
+        this.load.image('v5', 'assets/game_images/walls/v5.png')
+        this.load.image('h7', 'assets/game_images/walls/h7.png')
+        this.load.spritesheet('ninja', 'assets/game_images/character/Run (32x32).png', {frameWidth: 32, frameHeight:32})
+        this.load.spritesheet('trap', 'assets/game_images/traps/trap(38x38).png', {frameWidth: 38, frameHeight:38})
     }
     create(){
         this.background = this.add.tileSprite(300,0,600, 500, 'bg_lvl3' )
@@ -433,6 +437,34 @@ class Scene3Level3 extends Phaser.Scene
         this.reset_btn = this.add.image(150,400, 'reset_btn')
         this.reset_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelThree'))
         this.reset_btn.scale = 0.3
+
+        this.h1 = this.physics.add.image(343,380,'h1')
+        this.h1.scale = 1.35
+        this.h1.flipY = true
+      
+        this.v5 = this.physics.add.image(380,210,'v5')
+        this.v5.scale = 1.35
+        this.v5.flipY = false
+
+        this.h7 = this.physics.add.image(596,38,'h7')
+        this.h7.scale = 1.35
+        this.h7.flipY = 
+        
+        this.h7 = this.physics.add.image(540,470,'h7')
+        this.h7.scale = 1.35
+        this.h7.flipY = true
+
+        this.h1 = this.physics.add.image(550,350,'h1')
+        this.h1.scale = 1.35
+        this.h1.flipY = true
+
+        this.h1 = this.physics.add.image(680,250,'h1')
+        this.h1.scale = 1.35
+        this.h1.flipY = true
+      
+
+       
+
 
 
       
