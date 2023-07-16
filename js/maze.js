@@ -604,7 +604,14 @@ class levely extends Phaser.Scene
 
         this.hint2 = this.add.text(100,270, `: -5pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
         this.trap_hint = this.physics.add.sprite(70,290,'trap')
+
+        this.reset_btn = this.add.image(150,400, 'reset_btn')
+        this.reset_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelOne'))
+        this.reset_btn.scale = 0.3
+
+        this.cursorKeys = this.input.keyboard.createCursorKeys()
         
+
 
 
     }
