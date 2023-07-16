@@ -596,13 +596,16 @@ class Scene5Level4 extends Phaser.Scene
         });
 
 
+        this.fruits_grp = this.physics.add.group()
+        this.strawberry_1 = this.physics.add.sprite(510,150,'strawberry')
+        this.fruits_grp.add(this.strawberry_1)
         this.anims.create({
             key:'strawberry_anim',
             frames: this.anims.generateFrameNumbers('strawberry'),
             frameRate:20,
             repeat: -1
         })
-
+        this.strawberry_1.play('strawberry_anim')
         this.strawberry_hint.play('strawberry_anim')
 
         this.trap_hint.play('trap_anim')
