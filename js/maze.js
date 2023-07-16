@@ -610,6 +610,15 @@ class Scene5Level4 extends Phaser.Scene
             this.ninja.x += 3
             this.ninja.flipX = false
         }
+
+        let walls = this.walls_grp.getChildren()
+        for (let i = 0; i < walls.length; i++) {
+            let wall = walls[i]
+
+            if (Phaser.Geom.Intersects.RectangleToRectangle(this.ninja.getBounds(), wall.getBounds())) {
+                this.ninja.setPosition(x_before_move, y_before_move)
+            }
+        }
     }
     
 
