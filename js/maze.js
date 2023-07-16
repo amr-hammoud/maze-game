@@ -413,6 +413,27 @@ class Scene3Level3 extends Phaser.Scene
     create(){
         this.background = this.add.tileSprite(300,0,600, 500, 'bg_lvl3' )
         this.background.setOrigin(0,0)
+
+        this.left_panel = this.add.rectangle(0,0,300,500,0x7ab980)
+        this.left_panel.setOrigin(0,0)
+
+        this.score = 0
+        this.score_label = this.add.text(50,30, `Score: ${this.score}`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
+
+        this.min_score = 20
+        this.alert = this.add.text(50,100, `Score at least\n${this.min_score}pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
+
+        this.hint = this.add.text(100,220, `: +10pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
+        this.apple_hint = this.physics.add.sprite(70,240,'apple')
+        this.apple_hint.scale = 3
+        
+        this.hint2 = this.add.text(100,270, `: -5pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
+        this.trap_hint = this.physics.add.sprite(70,290,'trap')
+        
+        this.reset_btn = this.add.image(150,400, 'reset_btn')
+        this.reset_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelTwo'))
+        this.reset_btn.scale = 0.3
+        
     }
     update(){
     }
