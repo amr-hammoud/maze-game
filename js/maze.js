@@ -559,7 +559,7 @@ class levely extends Phaser.Scene
 
     preload ()
     {
-        this.load.image('bg_levely', 'assets/game_images/level_backgrouds/purple.png')
+        this.load.image('bg_levely', 'assets/game_images/level_backgrouds/Gray.png')
         this.load.image('start_btn', 'assets/game_images/buttons/button-start.png')
         this.load.image('arrows', 'assets/game_images/buttons/buttons.png')
         this.load.spritesheet('ninja', 'assets/game_images/character/Run (32x32).png', {frameWidth: 32, frameHeight:32})
@@ -586,7 +586,11 @@ class levely extends Phaser.Scene
       
     create ()
     {
-        
+        this.background = this.add.tileSprite(300,0,600, 500, 'bg_levely' )
+        this.background.setOrigin(0,0)
+
+        this.left_panel = this.add.rectangle(0,0,300,500,0x7ab980)
+        this.left_panel.setOrigin(0,0)
     }
     update(){
 
