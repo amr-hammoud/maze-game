@@ -263,6 +263,8 @@ class Scene3Level2 extends Phaser.Scene
     {
         this.load.image('to_lvl_3', 'assets/game_images/level_ending/03.png')
         this.load.image('big_wall_silver', 'assets/game_images/walls/TerrainSilver(16x16).png')
+        this.load.spritesheet('banana', 'assets/game_images/food/Bananas.png', {frameWidth: 32, frameHeight:32})
+
 
     }
     create(){
@@ -275,16 +277,16 @@ class Scene3Level2 extends Phaser.Scene
         this.score = 0
         this.score_label = this.add.text(50,30, `Score: ${this.score}`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
 
-        this.min_score = 20
+        this.min_score = 70
         this.alert = this.add.text(50,100, `Score at least\n${this.min_score}pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
 
         this.hint = this.add.text(100,220, `: +10pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
-        this.apple_hint = this.physics.add.sprite(70,240,'apple')
-        this.apple_hint.scale = 3
+        this.banana_hint = this.add.sprite(70,240,'banana')
+        this.banana_hint.scale = 3
         
         this.hint2 = this.add.text(100,270, `: -5pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
-        this.trap_hint = this.physics.add.sprite(70,290,'trap')
-        
+        this.trap_hint = this.add.sprite(70,290,'trap')
+        this.trap_hint.play('trap_anim')
         this.reset_btn = this.add.image(150,400, 'reset_btn')
         this.reset_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelTwo'))
         this.reset_btn.scale = 0.3
@@ -296,7 +298,9 @@ class Scene3Level2 extends Phaser.Scene
         this.big_wall1.flipY = true
         this.big_wall2 = this.physics.add.image(600,480,'big_wall_silver')
         this.big_wall2.scale = 0.85
-        this.big_wall1.flipY = true
+        this.big_wall3 = this.physics.add.image(850,390,'big_wall_silver')
+        this.big_wall3.scale = 1.5
+        this.big_wall3.angle = 90
         this.cursorKeys = this.input.keyboard.createCursorKeys()
 
 
@@ -309,20 +313,38 @@ class Scene3Level2 extends Phaser.Scene
         
         this.walls_grp.add(this.big_wall1)
         this.walls_grp.add(this.big_wall2)
+        this.walls_grp.add(this.big_wall3)
         
-        // this.fruits_grp = this.physics.add.group()
-        // this.apple_1 = this.physics.add.sprite(505,250,'apple')
-        // this.apple_2 = this.physics.add.sprite(730,310,'apple')
-        // this.fruits_grp.add(this.apple_1)
-        // this.fruits_grp.add(this.apple_2)
-        // this.anims.create({
-        //     key:'apple_anim',
-        //     frames: this.anims.generateFrameNumbers('apple'),
-        //     frameRate:20,
-        //     repeat: -1
-        // })
-        // this.apple_1.play('apple_anim')
-        // this.apple_2.play('apple_anim')
+        this.fruits_grp = this.physics.add.group()
+        this.banana_1 = this.physics.add.sprite(450,100,'banana')
+        this.banana_2 = this.physics.add.sprite(600,100,'banana')
+        this.banana_3 = this.physics.add.sprite(750,100,'banana')
+        this.banana_4 = this.physics.add.sprite(750,250,'banana')
+        this.banana_5 = this.physics.add.sprite(600,250,'banana')
+        this.banana_6 = this.physics.add.sprite(450,250,'banana')
+        this.banana_7 = this.physics.add.sprite(450,400,'banana')
+
+        this.fruits_grp.add(this.banana_1)
+        this.fruits_grp.add(this.banana_2)
+        this.fruits_grp.add(this.banana_3)
+        this.fruits_grp.add(this.banana_4)
+        this.fruits_grp.add(this.banana_5)
+        this.fruits_grp.add(this.banana_6)
+        this.fruits_grp.add(this.banana_7)
+        this.anims.create({
+            key:'banana_anim',
+            frames: this.anims.generateFrameNumbers('banana'),
+            frameRate:20,
+            repeat: -1
+        })
+        this.banana_hint.play('banana_anim')
+        this.banana_1.play('banana_anim')
+        this.banana_2.play('banana_anim')
+        this.banana_3.play('banana_anim')
+        this.banana_4.play('banana_anim')
+        this.banana_5.play('banana_anim')
+        this.banana_6.play('banana_anim')
+        this.banana_7.play('banana_anim')
 
         this.traps_grp = this.physics.add.group()
         this.trap1 = this.physics.add.sprite(420,150,'trap')
@@ -331,6 +353,13 @@ class Scene3Level2 extends Phaser.Scene
         this.trap4 = this.physics.add.sprite(570,150,'trap')
         this.trap5 = this.physics.add.sprite(620,150,'trap')
         this.trap6 = this.physics.add.sprite(670,150,'trap')
+        this.trap7 = this.physics.add.sprite(570,325,'trap')
+        this.trap8 = this.physics.add.sprite(620,325,'trap')
+        this.trap9 = this.physics.add.sprite(670,325,'trap')
+        this.trap10 = this.physics.add.sprite(720,325,'trap')
+        this.trap11 = this.physics.add.sprite(770,325,'trap')
+        this.trap12 = this.physics.add.sprite(820,325,'trap')
+
 
         this.traps_grp.add(this.trap1)
         this.traps_grp.add(this.trap2)
@@ -338,6 +367,14 @@ class Scene3Level2 extends Phaser.Scene
         this.traps_grp.add(this.trap4)
         this.traps_grp.add(this.trap5)
         this.traps_grp.add(this.trap6)
+        this.traps_grp.add(this.trap7)
+        this.traps_grp.add(this.trap8)
+        this.traps_grp.add(this.trap9)
+        this.traps_grp.add(this.trap10)
+        this.traps_grp.add(this.trap11)
+        this.traps_grp.add(this.trap12)
+        this.traps_grp.add(this.trap12)
+
 
         this.trap1.play('trap_anim')
         this.trap2.play('trap_anim')
@@ -345,6 +382,12 @@ class Scene3Level2 extends Phaser.Scene
         this.trap4.play('trap_anim')
         this.trap5.play('trap_anim')
         this.trap6.play('trap_anim')
+        this.trap7.play('trap_anim')
+        this.trap8.play('trap_anim')
+        this.trap9.play('trap_anim')
+        this.trap10.play('trap_anim')
+        this.trap11.play('trap_anim')
+        this.trap12.play('trap_anim')
 
         this.ninja = this.physics.add.sprite(325,100,'ninja')
         this.character_grp = this.physics.add.group()
@@ -355,14 +398,24 @@ class Scene3Level2 extends Phaser.Scene
         this.ninja.play('ninja_anim')
         this.physics.world.setBounds(300, 0, 900, 500);
 
-        this.to_lvl_3 = this.physics.add.sprite(880,400,'to_lvl_3')
+        this.to_lvl_3 = this.physics.add.sprite(750,400,'to_lvl_3')
         this.to_lvl_3.scale = 2
 
         this.physics.add.collider(this.ninja,this.fruits_grp, (ninja, fruit) => {
             fruit.destroy()
+            this.score += 10
+            this.score_label.text = "Score: " + this.score
         })
-        this.physics.add.collider(this.ninja,this.to_lvl_3, () => this.scene.start('gameLevelThree'))
-        this.physics.add.collider(this.ninja,this.traps_grp, () => this.ninja.setPosition(this.ninja.x - 10, this.ninja.y - 10))
+        this.physics.add.collider(this.ninja,this.to_lvl_3, () => {
+            if(this.score >= this.min_score)
+                this.scene.start('gameLevelThree')
+        })
+        this.physics.add.collider(this.ninja,this.traps_grp, () => {
+            this.ninja.setPosition(this.ninja.x - 10, this.ninja.y - 10)
+            this.score -= 5
+            this.score_label.text = "Score: " + this.score
+                }
+            )
         
     }
     update(){
