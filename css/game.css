@@ -27,7 +27,7 @@ body {
 
 .content h2 {
   color: #fff;
-  font-size: 8em;
+  font-size: 6em;
   position: absolute;
   top: 10%;
 }
@@ -75,7 +75,7 @@ body {
 @keyframes slidein {
   from {
     background-position: top;
-    background-size: 3000px;
+    background-size: 4000px;
   }
   to {
     background-position: -100px 0px;
@@ -83,11 +83,11 @@ body {
   }
 }
 
-canvas{
+canvas {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   margin-top: 50px;
   width: 55%;
   border-radius: 10px;

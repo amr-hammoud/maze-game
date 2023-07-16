@@ -1,85 +1,88 @@
-@import url('https://fonts.cdnfonts.com/css/berlin-sans-fb-demi');
+@import url("https://fonts.cdnfonts.com/css/berlin-sans-fb-demi");
 
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Berlin Sans FB Demi', sans-serif;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Berlin Sans FB Demi", sans-serif;
 }
-body{
-    min-height: 100vh;
-    overflow-x: hidden;
+body {
+  min-height: 100vh;
+  background-color: #57b587;
+  overflow-x: hidden;
 }
-.hero_section{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    position: relative;
-    height: 100vh;    
+.hero_section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  height: 100vh;
 }
-.txt{
-    position: absolute;
-    top: 100px;
-    font-size: 2rem;
-    color: rgb(65, 65, 65);
-    letter-spacing: 5px;
-   
+.txt {
+  position: absolute;
+  top: 100px;
+  font-size: 2rem;
+  color: rgb(65, 65, 65);
+  text-shadow: 0 0 15px white;
+  letter-spacing: 5px;
 }
-.mountain{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+.mountain {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
-.bushes{
-    position: absolute;
-    top: 20rem;
-    left: 0;
-    right: 20rem;
-    width: 100%;
-}
-
-.cloud1{
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-.birds{
-    position: absolute;
-    width: 100%;
-    height: 50%;
-    top: 0;
-    left: 0;
-}
-.cloud1{
-    position: absolute;
-    width: 50%;
-    height: 50%;
-    top: 60px;
-    left: 0;
-}
-.cloud2{
-    position: absolute;
-    width: 70%;
-    height: 50%;
-    top: 0;
-    left: 300px;
+.bushes {
+  position: absolute;
+  top: 20rem;
+  left: 0;
+  right: 20rem;
+  width: 100%;
 }
 
-.button{
-    position: absolute;
-    top: 350px;
-    color: #57b587;
-    background-color: rgb(30, 63, 65);
-    margin: 30px;
-    padding: 30px;
-    text-align: center;
-    text-decoration: none;
-    font-size: 1.8rem;
-    border-radius: 30px;
+.cloud1 {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
-a:hover{
-    color: aliceblue;
+.birds {
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  top: 0;
+  left: 0;
+  mix-blend-mode: multiply;
+}
+.cloud1 {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  top: 60px;
+  left: 0;
+}
+.cloud2 {
+  position: absolute;
+  width: 70%;
+  height: 50%;
+  top: 0;
+  left: 300px;
 }
 
+.button {
+  position: absolute;
+  top: 350px;
+  color: #57b587;
+  background-color: white;
+  margin: 30px;
+  padding: 20px 30px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1.8rem;
+  border-radius: 10px;
+  transition: 0.3s;
+}
+a:hover {
+  color: aliceblue;
+  background-color: #57b587;
+}
