@@ -573,7 +573,7 @@ class levely extends Phaser.Scene
         this.load.image('wallv_6', 'assets/game_images/walls/v6.png')
         this.load.image('wallv_1', 'assets/game_images/walls/v1.png')
         this.load.image('wallv_2', 'assets/game_images/walls/v2.png')
-        this.load.image('wallv_3', 'assets/game_images/walls/v3.png')
+        this.load.image('wallv_8', 'assets/game_images/walls/v8.png')
 
         this.load.image('big_wall', 'assets/game_images/walls/Terrain (16x16).png')
         this.load.image('to_lvl_2', 'assets/game_images/level_ending/02.png')
@@ -606,11 +606,17 @@ class levely extends Phaser.Scene
         this.trap_hint = this.physics.add.sprite(70,290,'trap')
 
         this.reset_btn = this.add.image(150,400, 'reset_btn')
-        this.reset_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelOne'))
+        this.reset_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('level_y'))
         this.reset_btn.scale = 0.3
 
         this.cursorKeys = this.input.keyboard.createCursorKeys()
-        
+
+        this.walls_grp = this.physics.add.group()
+        this.walls_grp.add(this.physics.add.image(625,20,'wallh_10'))
+        this.walls_grp.add(this.physics.add.image(855,300,'wallv_8'))
+        this.walls_grp.add(this.physics.add.image(610,480,'wallh_10'))
+        this.walls_grp.add(this.physics.add.image(360,300,'wallv_8'))
+
 
 
 
