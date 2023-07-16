@@ -392,6 +392,16 @@ class Scene3Level2 extends Phaser.Scene
         this.trap12.play('trap_anim')
         this.trap13.play('trap_anim')
 
+        this.tweens.add({
+            targets: this.trap13,
+            x: 720,
+            y: 150,
+            duration: 1600,
+            ease: "Power2",
+            yoyo: true,
+            loop: -1
+        });
+
         this.ninja = this.physics.add.sprite(325,100,'ninja')
         this.character_grp = this.physics.add.group()
         this.character_grp.add(this.ninja)
