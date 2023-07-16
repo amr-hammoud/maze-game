@@ -22,6 +22,7 @@ class Scene1 extends Phaser.Scene
         this.load.image('wallh_5', 'assets/game_images/walls/h5.png')
         this.load.image('wallh_3', 'assets/game_images/walls/h3.png')
         this.load.image('wallh_2', 'assets/game_images/walls/h2.png')
+        this.load.image('wallh_4', 'assets/game_images/walls/h4.png')
         this.load.image('wallv_6', 'assets/game_images/walls/v6.png')
         this.load.image('wallv_1', 'assets/game_images/walls/v1.png')
         this.load.image('wallv_2', 'assets/game_images/walls/v2.png')
@@ -548,18 +549,20 @@ class Scene5Level4 extends Phaser.Scene
         this.big_wall1 = this.physics.add.image(343,250,'big_wall_silver')
         this.big_wall1.scale = 1.35
         this.big_wall1.flipY = true
-        this.big_wall3 = this.physics.add.image(850,105,'big_wall_silver')
-        this.big_wall3.scale = 1.5
-        this.big_wall3.angle = 90
+        this.big_wall2 = this.physics.add.image(850,105,'big_wall_silver')
+        this.big_wall2.scale = 1.5
+        this.big_wall2.angle = 90
 
         this.walls_grp = this.physics.add.group()
         this.walls_grp.add(this.physics.add.image(625,450,'wallh_10'))
         this.walls_grp.add(this.physics.add.image(625,50,'wallh_10'))
         this.walls_grp.add(this.physics.add.image(855,298,'wallv_6'))
         this.walls_grp.add(this.physics.add.image(394,302,'wallv_6'))
+        this.walls_grp.add(this.physics.add.image(550,205,'wallv_6'))
+        this.walls_grp.add(this.physics.add.image(640,340,'wallh_4'))
+        this.walls_grp.add(this.physics.add.image(750,205,'wallh_4'))
         this.walls_grp.add(this.big_wall1)
-        this.walls_grp.add(this.big_wall3)
-
+        this.walls_grp.add(this.big_wall2)
 
         this.anims.create({
             key:'strawberry_anim',
