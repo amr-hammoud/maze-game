@@ -550,12 +550,33 @@ class Scene5Level4 extends Phaser.Scene
 
 }
 
+class levely extends Phaser.Scene
+{
+    constructor ()
+    {
+        super('level_y');
+    }
+
+    preload ()
+    {
+        
+    }
+      
+    create ()
+    {
+        
+    }
+    update(){
+
+    }
+}
+
 
 const config = {
     type: Phaser.AUTO,
     width: 900,
     height: 500,
-    scene: [Scene1, Scene2Level1, Scene3Level2, Scene4Level3, Scene5Level4],
+    scene: [Scene1, Scene2Level1, Scene3Level2, Scene4Level3, Scene5Level4,levely],
     physics: {
         default: "arcade",
         arcade: {
