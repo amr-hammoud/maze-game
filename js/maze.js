@@ -70,7 +70,7 @@ class Scene1 extends Phaser.Scene {
     this.start_btn = this.add.image(150, 400, "start_btn");
     this.start_btn
       .setInteractive({ useHandCursor: true })
-      .on("pointerdown", () => this.scene.start("gameEnding"));
+      .on("pointerdown", () => this.scene.start("gameLevelOne"));
     this.start_btn.scale = 1.5;
     this.tweens.add({
       targets: this.start_btn,
@@ -465,7 +465,7 @@ class Scene3Level2 extends Phaser.Scene {
       this.score_label.text = "Score: " + this.score;
     });
     this.physics.add.collider(this.ninja, this.to_lvl_3, () => {
-      if (this.score >= this.min_score) this.scene.start("gameLevelThree");
+      if (this.score >= this.min_score) this.scene.start("gameEnding");
     });
     this.physics.add.collider(this.ninja, this.traps_grp, () => {
       this.ninja.setPosition(this.ninja.x - 10, this.ninja.y - 10);
