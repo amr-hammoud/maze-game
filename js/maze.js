@@ -541,6 +541,8 @@ class Scene5Level4 extends Phaser.Scene
         this.reset_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelFour'))
         this.reset_btn.scale = 0.3
 
+        this.cursorKeys = this.input.keyboard.createCursorKeys()
+
         this.anims.create({
             key:'strawberry_anim',
             frames: this.anims.generateFrameNumbers('strawberry'),
@@ -568,6 +570,28 @@ class Scene5Level4 extends Phaser.Scene
         
     }
     update(){
+        this.moving_ninja()
+    }
+
+    moving_ninja(){
+
+        let x_before_move = this.ninja.x
+        let y_before_move = this.ninja.y
+
+        if(this.cursorKeys.up.isDown){
+            this.ninja.y -= 3
+        }
+        if(this.cursorKeys.down.isDown){
+            this.ninja.y += 3
+        }
+        if(this.cursorKeys.left.isDown){
+            this.ninja.x -= 3
+            this.ninja.flipX = true
+        }
+        if(this.cursorKeys.right.isDown){
+            this.ninja.x += 3
+            this.ninja.flipX = false
+        }
     }
     
 
