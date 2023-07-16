@@ -502,7 +502,7 @@ class Scene4Level3 extends Phaser.Scene
         this.left_panel = this.add.rectangle(0,0,300,500,0x7ab980)
         this.left_panel.setOrigin(0,0)
         this.score = 0
-        this.score_label = this.add.text(50,30, `Score: ${this.score}`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
+        this.score_label = this.add.text(20,30, `Just escape!`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
 
         this.alert = this.add.text(50,100, `CAREFUL!\n Hidden traps \n are around ;D\n\n`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
         this.hint = this.add.text(100,220, `: +10pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
@@ -524,22 +524,31 @@ class Scene4Level3 extends Phaser.Scene
         this.walls_grp.add(this.physics.add.image(335,350,'terain'))
         this.walls_grp.add(this.physics.add.image(600,490,'h10'))
         this.walls_grp.add(this.physics.add.image(500,490,'h3'))
+        this.walls_grp.add(this.physics.add.image(870,200,'v7'))
+
 
         this.traps_grp = this.physics.add.group()
-        this.traps_grp.add(this.physics.add.sprite(520,450,'trap'))
-        this.traps_grp.add(this.physics.add.sprite(520,400,'trap'))
+        this.hidden1=this.physics.add.sprite(520,450,'trap')
+        this.hidden1.visible=false
+        this.traps_grp.add(this.hidden1)
+        this.hidden2=this.physics.add.sprite(520,400,'trap')
+        this.hidden2.visible=false
+        this.traps_grp.add(this.hidden2)
         this.traps_grp.add(this.physics.add.sprite(600,450,'trap'))
         this.traps_grp.add(this.physics.add.sprite(640,400,'trap'))
-        this.traps_grp.add(this.physics.add.sprite(520,200,'trap'))
-        this.traps_grp.add(this.physics.add.sprite(520,250,'trap'))
+        this.traps_grp.add(this.physics.add.sprite(520,230,'trap'))
         this.traps_grp.add(this.physics.add.sprite(520,150,'trap'))
         this.traps_grp.add(this.physics.add.sprite(520,100,'trap'))
-        this.traps_grp.add(this.physics.add.sprite(850,350,'trap'))
+        this.traps_grp.add(this.physics.add.sprite(520,50,'trap'))
+        this.hidden3=this.physics.add.sprite(850,320,'trap')
+        this.hidden3.visible=false
+        this.traps_grp.add(this.hidden3)
         this.traps_grp.add(this.physics.add.sprite(800,310,'trap'))
         this.traps_grp.add(this.physics.add.sprite(720,450,'trap'))
         this.traps_grp.add(this.physics.add.sprite(720,120,'trap'))
 
-        this.physics.add.image(880,420,"to_lvl_4")
+
+        this.to_lvl_4=this.physics.add.image(880,420,"to_lvl_4")
         
         this.ninja = this.physics.add.sprite(350,420,'ninja')
         this.ninja.scale = 2.3
@@ -555,8 +564,11 @@ class Scene4Level3 extends Phaser.Scene
 
         this.physics.add.collider(this.ninja, this.traps_grp, () => {
             this.ninja.setPosition(this.ninja.x =350, this.ninja.y =420)
-			this.score_label.text = "Score: " + this.score;
 		});
+
+        this.physics.add.collider(this.ninja,this.to_lvl_4, () => {
+                this.scene.start('gameLevelFour')
+        })
     }
 
     
@@ -648,7 +660,7 @@ const config = {
     physics: {
         default: "arcade",
         arcade: {
-          debug: false
+          debug: true
         }
       }
 };
