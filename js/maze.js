@@ -144,6 +144,10 @@ class Scene2Level1 extends Phaser.Scene
         this.big_wall1.scale = 1.35
         this.big_wall2 = this.physics.add.image(600,480,'big_wall')
         this.big_wall2.scale = 0.85
+        this.big_wall3 = this.physics.add.image(830,100,'big_wall')
+        this.big_wall3.scale = 1.3
+        this.big_wall3.angle = 90
+        
 
 
 
@@ -161,6 +165,7 @@ class Scene2Level1 extends Phaser.Scene
         this.walls_grp.add(this.physics.add.image(670,150,'wallh_8'))
         this.walls_grp.add(this.big_wall1)
         this.walls_grp.add(this.big_wall2)
+        this.walls_grp.add(this.big_wall3)
         
         this.fruits_grp = this.physics.add.group()
         this.apple_1 = this.physics.add.sprite(605,250,'apple')
@@ -188,7 +193,7 @@ class Scene2Level1 extends Phaser.Scene
         this.ninja.play('ninja_anim')
         this.physics.world.setBounds(300, 0, 900, 500);
 
-        this.to_lvl_2 = this.physics.add.sprite(780,100,'to_lvl_2')
+        this.to_lvl_2 = this.physics.add.sprite(750,100,'to_lvl_2')
         this.to_lvl_2.scale = 2
 
         
