@@ -42,6 +42,8 @@ class Scene1 extends Phaser.Scene
             yoyo: true,
             loop: -1
         })
+    this.left_panel = this.add.rectangle(0, 0, 300, 500, 0x7ab980);
+    this.left_panel.setOrigin(0, 0);
 
 
         this.ninja = this.add.sprite(430,420,'ninja')
@@ -245,6 +247,16 @@ class Scene2Level1 extends Phaser.Scene
     if (Phaser.Geom.Intersects.RectangleToRectangle(this.ninja.getBounds(), this.trap.getBounds())) {
         this.ninja.setPosition(x_before_move -20 , y_before_move)
     }
+    if (this.cursorKeys.down.isDown) {
+      this.ninja.y += 3;
+    }
+    if (this.cursorKeys.left.isDown) {
+      this.ninja.x -= 3;
+      this.ninja.flipX = true;
+    }
+    if (this.cursorKeys.right.isDown) {
+      this.ninja.x += 3;
+      this.ninja.flipX = false;
     }
 
 }
