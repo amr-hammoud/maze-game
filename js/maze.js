@@ -650,11 +650,50 @@ class levely extends Phaser.Scene
         this.cherries_3.play('cherries_anim')
         this.cherries_4.play('cherries_anim')
         this.cherries_hint.play('cherries_anim')
-        
-        this.trap = this.physics.add.sprite(600,70,'trap')
-        this.trap.scale = 1
-        this.trap.play('trap_anim')
+
+        this.traps_grp = this.physics.add.group()
+        this.trap1 = this.physics.add.sprite(600,70,'trap')
+        this.trap2 = this.physics.add.sprite(570,290,'trap')
+        this.trap3 = this.physics.add.sprite(570,150,'trap')
+        this.trap4 = this.physics.add.sprite(400,360,'trap')
+        this.trap5 = this.physics.add.sprite(730,300,'trap')
+        this.trap6 = this.physics.add.sprite(820,180,'trap')
+        this.trap7 = this.physics.add.sprite(750,420,'trap')
+        this.trap8 = this.physics.add.sprite(390,220,'trap')
+        this.trap9 = this.physics.add.sprite(740,70,'trap')
+
+       this.traps_grp.add(this.trap1)
+       this.traps_grp.add(this.trap2)
+       this.traps_grp.add(this.trap3)
+       this.traps_grp.add(this.trap4)
+       this.traps_grp.add(this.trap5)
+       this.traps_grp.add(this.trap6)
+       this.traps_grp.add(this.trap7)
+       this.traps_grp.add(this.trap8)
+       this.traps_grp.add(this.trap9)
+
+      
+      this.trap1.play('trap_anim')
+      this.trap2.play('trap_anim')
+      this.trap3.play('trap_anim')
+      this.trap4.play('trap_anim')
+      this.trap5.play('trap_anim')
+      this.trap6.play('trap_anim')
+      this.trap7.play('trap_anim')
+      this.trap8.play('trap_anim')
+      this.trap9.play('trap_anim')
+
+        this.trap4.visible = false;
+        this.trap1.scale = 1
+        this.trap1.visible = false;
         this.trap_hint.play('trap_anim')
+        this.trap2.scale = 1
+        this.trap2.visible = false;
+        this.trap7.visible = false;
+        this.trap6.visible = false;
+        this.trap8.visible = false;
+        
+
 
         this.ninja = this.physics.add.sprite(325,50,'ninja')
         this.ninja.setCollideWorldBounds(true)
@@ -663,7 +702,7 @@ class levely extends Phaser.Scene
         this.ninja.play('ninja_anim')
         this.physics.world.setBounds(300, 0, 900, 500);
 
-        this.to_lvl_2 = this.physics.add.sprite(750,100,'to_lvl_2')
+        this.to_lvl_2 = this.physics.add.sprite(850,100,'to_lvl_2')
         this.to_lvl_2.scale = 2
 
         
@@ -675,9 +714,15 @@ class levely extends Phaser.Scene
         })
 
         this.physics.add.collider(this.ninja,this.to_lvl_2, () => {
-            if(this.score >= 20)
+            if(this.score >= 40)
                 this.scene.start('to_lvl_2')
         })
+        this.physics.add.collider(this.ninja,this.traps_grp, () => {
+            this.ninja.setPosition(this.ninja.x - 10, this.ninja.y - 10)
+            this.score -= 5
+            this.score_label.text = "Score: " + this.score
+                }
+            )
         
        
 
@@ -722,11 +767,7 @@ class levely extends Phaser.Scene
                 this.ninja.setPosition(x_before_move, y_before_move)
             }
     }
-    if (Phaser.Geom.Intersects.RectangleToRectangle(this.ninja.getBounds(), this.trap.getBounds())) {
-        this.ninja.setPosition(x_before_move -20 , y_before_move)
-        this.score -= 5
-        this.score_label.text = "Score: " + this.score
-    }
+    
     }
 }
 
