@@ -616,13 +616,54 @@ class levely extends Phaser.Scene
         this.walls_grp.add(this.physics.add.image(855,300,'wallv_8'))
         this.walls_grp.add(this.physics.add.image(610,480,'wallh_10'))
         this.walls_grp.add(this.physics.add.image(360,300,'wallv_8'))
+       
+
+        
+        
+
 
 
 
 
     }
-    update(){
+    update()
+    {
+        this.moving_ninja();
+    }
 
+    moving_ninja(){
+
+        let x_before_move = this.ninja.x
+        let y_before_move = this.ninja.y
+
+        if(this.cursorKeys.up.isDown){
+            this.ninja.y -= 3
+        }
+        if(this.cursorKeys.down.isDown){
+            this.ninja.y += 3
+        }
+        if(this.cursorKeys.left.isDown){
+            this.ninja.x -= 3
+            this.ninja.flipX = true
+        }
+        if(this.cursorKeys.right.isDown){
+            this.ninja.x += 3
+            this.ninja.flipX = false
+        }
+
+        let walls = this.walls_grp.getChildren()
+        for (let i = 0; i < walls.length; i++) {
+            let wall = walls[i]
+
+            if (Phaser.Geom.Intersects.RectangleToRectangle(this.ninja.getBounds(), wall.getBounds())) {
+                this.ninja.setPosition(x_before_move, y_before_move)
+            }
+    }
+    if (Phaser.Geom.Intersects.RectangleToRectangle(this.ninja.getBounds(), this.trap.getBounds())) {
+        this.ninja.setPosition(x_before_move -20 , y_before_move)
+        this.score -= 5
+        this.score_label.text = "Score: " + this.score
+    }
     }
 }
 
