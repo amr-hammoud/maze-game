@@ -463,6 +463,7 @@ class Scene3Level2 extends Phaser.Scene
             if (Phaser.Geom.Intersects.RectangleToRectangle(this.ninja.getBounds(), wall.getBounds())) {
                 this.ninja.setPosition(x_before_move, y_before_move)
             }
+            
         }
 
     }
@@ -483,6 +484,7 @@ class Scene4Level3 extends Phaser.Scene
         this.load.image('h1', 'assets/game_images/walls/h1.png')
         this.load.image('v5', 'assets/game_images/walls/v5.png')
         this.load.image('h7', 'assets/game_images/walls/h7.png')
+        this.load.image('v7', 'assets/game_images/walls/v7.png')
         this.load.spritesheet('ninja', 'assets/game_images/character/Run (32x32).png', {frameWidth: 32, frameHeight:32})
         this.load.spritesheet('trap', 'assets/game_images/traps/trap(38x38).png', {frameWidth: 38, frameHeight:38})
     }
@@ -505,30 +507,14 @@ class Scene4Level3 extends Phaser.Scene
         this.reset_btn.setInteractive({ useHandCursor: true }).on('pointerdown', () => this.scene.start('gameLevelThree'))
         this.reset_btn.scale = 0.3
 
+        
+        this.walls_grp = this.physics.add.group()
+        this.walls_grp.add(this.physics.add.image(375,205,'v7'))
+        this.walls_grp.add(this.physics.add.image(680,250,'h1'))
+        this.walls_grp.add(this.physics.add.image(550,350,'h1'))
+        this.walls_grp.add(this.physics.add.image(540,30,'h7'))
+        this.walls_grp.add(this.physics.add.image(500,490,'h7'))
 
-        this.h1 = this.physics.add.image(343,380,'h1')
-        this.h1.scale = 1.35
-        this.h1.flipY = true
-
-        this.v5 = this.physics.add.image(380,210,'v5')
-        this.v5.scale = 1.35
-        this.v5.flipY = false
-
-        this.h7 = this.physics.add.image(596,38,'h7')
-        this.h7.scale = 1.35
-        this.h7.flipY = 
-
-        this.h7 = this.physics.add.image(540,470,'h7')
-        this.h7.scale = 1.35
-        this.h7.flipY = true
-
-        this.h1 = this.physics.add.image(550,350,'h1')
-        this.h1.scale = 1.35
-        this.h1.flipY = true
-
-        this.h1 = this.physics.add.image(680,250,'h1')
-        this.h1.scale = 1.35
-        this.h1.flipY = true
 
         
         this.ninja = this.add.sprite(350,420,'ninja')
@@ -567,6 +553,15 @@ class Scene4Level3 extends Phaser.Scene
         if(this.cursorKeys.right.isDown){
             this.ninja.x += 3
             this.ninja.flipX = false
+        }
+        let walls = this.walls_grp.getChildren()
+        for (let i = 0; i < walls.length; i++) {
+            let wall = walls[i]
+
+            if (Phaser.Geom.Intersects.RectangleToRectangle(this.ninja.getBounds(), wall.getBounds())) {
+                this.ninja.setPosition(x_before_move, y_before_move)
+            }
+            
         }
     }
 
