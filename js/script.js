@@ -40,6 +40,7 @@ gsap.from(".turtle",{
 
     },
     x: 600,
+    opacity:0,
 })
 
 
