@@ -44,7 +44,6 @@ class Scene1 extends Phaser.Scene
         this.load.spritesheet('apple', 'assets/game_images/food/Apple.png', {frameWidth: 32, frameHeight:32})
 
         this.load.image("Ground", "assets/Ending-scene-elements/ground.png");
-        this.load.image("Sky", "assets/Ending-scene-elements/sky.svg");
         this.load.image("Mountain", "assets/Ending-scene-elements/mountain.png");
     }
       
