@@ -78,7 +78,7 @@ class Scene1 extends Phaser.Scene
         })
 
         this.ninja = this.add.sprite(430,420,'ninja')
-        this.ninja.scale = 2.3
+        this.ninja.scale = 1.4
         this.anims.create({
             key:'ninja_anim',
             frames: this.anims.generateFrameNumbers('ninja'),
@@ -229,11 +229,11 @@ class Scene2Level1 extends Phaser.Scene
 
     }
     update(){
-        this.moving_ninja()
+        this.moveNinja()
 
         
     }
-    moving_ninja(){
+    moveNinja(){
 
         let x_before_move = this.ninja.x
         let y_before_move = this.ninja.y
@@ -446,9 +446,9 @@ class Scene3Level2 extends Phaser.Scene
             )
     }
     update(){
-        this.moving_ninja()
+        this.moveNinja()
     }
-    moving_ninja(){
+    moveNinja(){
 
         const x_before_move = this.ninja.x
         const y_before_move = this.ninja.y
@@ -504,12 +504,10 @@ class Scene4Level3 extends Phaser.Scene
         this.left_panel = this.add.rectangle(0,0,300,500,0x7ab980)
         this.left_panel.setOrigin(0,0)
         this.score = 0
-        this.score_label = this.add.text(20,30, `Just escape!`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
+        this.score_label = this.add.text(40,30, `Just escape!`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
 
-        this.alert = this.add.text(50,100, `CAREFUL!\n Hidden traps \n are around ;D\n\n`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
-        this.hint = this.add.text(100,220, `: +10pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
-        this.apple_hint = this.physics.add.sprite(70,240,'apple')
-        this.apple_hint.scale = 3
+        this.alert = this.add.text(50,100, `CAREFUL!\nHidden traps \nare around ;D\n\n`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
+
         this.hint2 = this.add.text(100,270, `: -5pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
         this.trap_hint = this.physics.add.sprite(70,290,'trap')
         this.reset_btn = this.add.image(150,400, 'reset_btn')
@@ -554,7 +552,7 @@ class Scene4Level3 extends Phaser.Scene
         this.to_lvl_4.scale = 2
         
         this.ninja = this.physics.add.sprite(350,420,'ninja')
-        this.ninja.scale = 2.3
+        this.ninja.scale = 1.4
         this.anims.create({
             key:'ninja_anim',
             frames: this.anims.generateFrameNumbers('ninja'),
@@ -576,10 +574,10 @@ class Scene4Level3 extends Phaser.Scene
 
     
     update(){
-        this.moving_ninja()
+        this.moveNinja()
 
     }
-    moving_ninja(){
+    moveNinja(){
 
         const x_before_move = this.ninja.x
         const y_before_move = this.ninja.y
@@ -643,7 +641,7 @@ class Scene5level4 extends Phaser.Scene
         this.score_label = this.add.text(50,30, `Score: ${this.score}`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '42px'})
 
         this.min_score = 40
-        this.alert = this.add.text(50,100, `Score at least\n${this.min_score}pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
+        this.alert = this.add.text(50,100, `Hidden Traps!\nScore ${this.min_score}pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
 
         this.hint = this.add.text(100,220, `: +10pts`, { fontFamily: '"Berlin Sans FB Demi", sans-serif', fontSize: '36px'})
         this.cherries_hint = this.physics.add.sprite(70,240,'cherries')
@@ -769,9 +767,9 @@ class Scene5level4 extends Phaser.Scene
             )
     }
     update(){
-       this.moving_ninja()
+       this.moveNinja()
     }
-    moving_ninja(){
+    moveNinja(){
 
         let x_before_move = this.ninja.x
         let y_before_move = this.ninja.y
@@ -839,7 +837,8 @@ class Scene6Level5 extends Phaser.Scene {
 			fontSize: "42px",
 		});
 
-		this.alert = this.add.text(50, 100, `Time\nManagement`, {
+        this.min_score = 30
+		this.alert = this.add.text(50, 100, `Score at least\n${this.min_score}pts`, {
 			fontFamily: '"Berlin Sans FB Demi", sans-serif',
 			fontSize: "36px",
 		});
@@ -1055,15 +1054,15 @@ class Scene6Level5 extends Phaser.Scene {
             this.damage_sound.play()
 		});
         this.physics.add.collider(this.ninja, this.to_end, () => {
-			if (this.score >= 30) {
+			if (this.score >= this.min_score) {
                 this.scene.start('gameEnding')}
 		});
 	}
 	update() {
-		this.moving_ninja();
+		this.moveNinja();
 	}
 
-	moving_ninja() {
+	moveNinja() {
 		let x_before_move = this.ninja.x;
 		let y_before_move = this.ninja.y;
 
