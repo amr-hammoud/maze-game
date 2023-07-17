@@ -94,6 +94,11 @@ a:hover {
   
 }
 
+.special_txt{
+  font-size: 5rem;
+  color: white;
+}
+  
 .special{
   box-sizing: border-box;
   margin-top: 200px;
@@ -105,4 +110,7 @@ a:hover {
   width: 100%;
   height: 70vh;
   flex-wrap: nowrap;
+}
+.invisible{
+  display: none;
 }
