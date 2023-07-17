@@ -21,7 +21,7 @@ body {
 }
 .txt {
   position: absolute;
-  top: 100px;
+  top: 110px;
   font-size: 2rem;
   color: rgb(65, 65, 65);
   text-shadow: 0 0 15px white;
@@ -85,4 +85,13 @@ body {
 a:hover {
   color: aliceblue;
   background-color: #57b587;
+  box-shadow: 7px 10px 5px rgba(0, 0, 0, 0.822);
+}
+.turtle{
+  position: absolute;
+  right: 0;
+  top: 28rem;
+  width: 40%;
+  height: 60%;
+  
 }
