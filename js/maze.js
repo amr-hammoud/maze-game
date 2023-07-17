@@ -44,7 +44,7 @@ class Scene1 extends Phaser.Scene
         this.load.spritesheet('apple', 'assets/game_images/food/Apple.png', {frameWidth: 32, frameHeight:32})
 
         this.load.image("Ground", "assets/Ending-scene-elements/ground.png");
-        this.load.image("Mountain", "assets/Ending-scene-elements/mountain.png");
+        // this.load.image("Mountain", "assets/Ending-scene-elements/mountain.png");
     }
       
     create ()
@@ -1111,9 +1111,9 @@ class EndingScene extends Phaser.Scene {
       const width = this.scale.width;
       const height = this.scale.height;
       this.input.on('pointerdown', () => this.scene.start('homePage'));
-      this.midground = this.add.image(0, 60, "Mountain");
-      this.midground.setOrigin(0, 0);
-      this.midground.scale = 0.2;
+    //   this.midground = this.add.image(0, 60, "Mountain");
+    //   this.midground.setOrigin(0, 0);
+    //   this.midground.scale = 0.2;
   
       this.foreground = this.add.image(400, 500, "Ground");
       this.foreground.scale = 0.4;
@@ -1146,7 +1146,7 @@ class EndingScene extends Phaser.Scene {
     update() {
       
       this.cameras.main.scrollX += 2;
-      this.midground.x = this.cameras.main.scrollX * 0.3;
+    //   this.midground.x = this.cameras.main.scrollX * 0.3;
       this.foreground.x = this.cameras.main.scrollX;
       this.startAgain.x = this.cameras.main.scrollX - 2;
       
@@ -1163,7 +1163,7 @@ const config = {
     physics: {
         default: "arcade",
         arcade: {
-          debug: true
+          debug: false
         }
       }
 };
