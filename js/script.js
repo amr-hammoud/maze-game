@@ -43,7 +43,10 @@ gsap.from(".turtle",{
     opacity:0,
 })
 
+let sec=document.getElementById("special")
+setTimeout(surprise, 15000);
 
-
-
+function surprise(){
+    sec.setAttribute("class", "special");
+}
 
